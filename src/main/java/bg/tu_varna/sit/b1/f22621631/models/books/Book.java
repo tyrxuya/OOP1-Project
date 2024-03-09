@@ -1,8 +1,8 @@
-package bg.tu_varna.sit.b1.f22621631.models.books;
+package main.java.bg.tu_varna.sit.b1.f22621631.models.books;
 
-import bg.tu_varna.sit.b1.f22621631.models.authors.Author;
-import bg.tu_varna.sit.b1.f22621631.models.books.enums.Genre;
-import bg.tu_varna.sit.b1.f22621631.models.books.enums.Rating;
+import main.java.bg.tu_varna.sit.b1.f22621631.models.authors.Author;
+import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Genre;
+import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Rating;
 
 import java.util.Set;
 

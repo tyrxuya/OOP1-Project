@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.b1.f22621631.models.books.enums;
+package main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums;
 
 public enum Rating {
     NO_RATING(0.0),

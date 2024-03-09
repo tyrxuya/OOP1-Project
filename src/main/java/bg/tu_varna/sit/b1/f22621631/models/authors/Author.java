@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.b1.f22621631.models.authors;
+package main.java.bg.tu_varna.sit.b1.f22621631.models.authors;
 
 public class Author {
     private String firstName;
