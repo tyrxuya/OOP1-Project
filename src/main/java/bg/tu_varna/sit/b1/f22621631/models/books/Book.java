@@ -12,11 +12,11 @@ public class Book {
     private Genre genre;
     private String description;
     private Integer publishingYear;
-    private Set<String> keyWords;
+    private String keyWords;
     private Rating rating;
     private String isbn;
 
-    public Book(Builder builder) {
+    private Book(Builder builder) {
         this.author = builder.author;
         this.title = builder.title;
         this.genre = builder.genre;
@@ -47,7 +47,7 @@ public class Book {
         return publishingYear;
     }
 
-    public Set<String> getKeyWords() {
+    public String getKeyWords() {
         return keyWords;
     }
 
@@ -93,7 +93,7 @@ public class Book {
         private Genre genre;
         private String description;
         private Integer publishingYear;
-        private Set<String> keyWords;
+        private String keyWords;
         private Rating rating;
         private String isbn;
 
@@ -114,7 +114,7 @@ public class Book {
             return this;
         }
 
-        public Builder keyWords(Set<String> keyWords) {
+        public Builder keyWords(String keyWords) {
             this.keyWords = keyWords;
             return this;
         }
