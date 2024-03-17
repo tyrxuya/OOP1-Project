@@ -1,27 +1,30 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums;
 
 public enum Genre {
-    FANTASY("Fantasy"),
-    SCIENCE_FICTION("Science fiction"),
-    DYSTOPIAN("Dystopian"),
     ACTION("Action"),
-    MYSTERY("Mystery"),
-    HORROR("Horror"),
-    THRILLER("Thriller"),
-    HISTORICAL("Historical"),
-    ROMANCE("Romance"),
-    CONTEMPORARY("Contemporary"),
-    CHILDRENS("Children's"),
     CHICK_LIT("Chick lit"),
+    CHILDRENS("Children's"),
+    CLASSIC("Classic"),
     COMING_OF_AGE("Coming-of-age"),
+    CONTEMPORARY("Contemporary"),
+    DYSTOPIAN("Dystopian"),
+    FAIRY_TALE("Fairy tale"),
+    FANTASY("Fantasy"),
+    HISTORICAL("Historical"),
+    HORROR("Horror"),
+    MYSTERY("Mystery"),
     POETRY("Poetry"),
+    ROMANCE("Romance"),
+    SCIENCE_FICTION("Science fiction"),
+    SHORT_STORY("Short story"),
+    THRILLER("Thriller"),
 
 
     BIOGRAPHY("Biography"),
     PSYCHOLOGY("Psychology"),
+    RELIGION("Religion"),
     SELF_HELP("Self-help"),
     TAROT("Tarot"),
-    RELIGION("Religion"),
     TEXTBOOK("Textbook");
 
     private final String genre;
