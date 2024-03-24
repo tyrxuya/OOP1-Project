@@ -15,7 +15,6 @@ public enum Command {
     BOOKS_SORT ("books sort", "Sorts the books by <title/author/year/rating> in <ASC(default)/DESC> order."),
     USERS_ADD ("users add", "Adds a user with <username> and <password> to the file."),
     USERS_REMOVE ("users remove", "Removes a user with <username> from a file.");
-
     private final String command;
     private final String description;
 
