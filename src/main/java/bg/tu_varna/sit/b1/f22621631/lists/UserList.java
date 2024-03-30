@@ -25,4 +25,8 @@ public class UserList {
     public List<User> getUserList() {
         return new ArrayList<>(userList);
     }
+
+    public void add(User user) {
+        userList.add(user);
+    }
 }

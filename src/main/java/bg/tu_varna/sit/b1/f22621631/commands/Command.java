@@ -10,6 +10,7 @@ public enum Command {
     LOGIN ("login", "Login to the application after being prompted with username and password."),
     LOGOUT ("logout", "Logout of the current user."),
     BOOKS_ALL ("books all", "Prints all the available books."),
+    BOOKS_ADD ("books add", "Adds a book to the library."),
     BOOKS_INFO ("books info", "Prints all the information on a book by a given <ISBN_Value>."),
     BOOKS_FIND ("books find", "Searches for a book by <title/author/tag>."),
     BOOKS_SORT ("books sort", "Sorts the books by <title/author/year/rating> in <ASC(default)/DESC> order."),

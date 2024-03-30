@@ -25,4 +25,19 @@ public class BookList {
     public List<Book> getBookList() {
         return new ArrayList<>(bookList);
     }
+
+    public void add(Book book) {
+        if (!bookExists(book)) {
+            bookList.add(book);
+        }
+    }
+
+    public boolean bookExists(Book book) {
+        for (Book currentBook : bookList) {
+            if (currentBook.getIsbn().equals(book.getIsbn())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

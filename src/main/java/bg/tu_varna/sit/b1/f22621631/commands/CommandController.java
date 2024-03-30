@@ -1,5 +1,14 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.commands;
 
+import main.java.bg.tu_varna.sit.b1.f22621631.commands.read.ReadBooks;
+import main.java.bg.tu_varna.sit.b1.f22621631.commands.write.WriteBooks;
+import main.java.bg.tu_varna.sit.b1.f22621631.lists.BookList;
+import main.java.bg.tu_varna.sit.b1.f22621631.lists.UserList;
+import main.java.bg.tu_varna.sit.b1.f22621631.models.authors.Author;
+import main.java.bg.tu_varna.sit.b1.f22621631.models.books.Book;
+import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Genre;
+import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Rating;
+
 public class CommandController {
     public static void run(String command) {
         if (command.isBlank()) {
@@ -40,6 +49,29 @@ public class CommandController {
                 case LOGIN -> System.out.println("I am LOGIN.\t\t" + Command.LOGIN.getDescription());
                 case LOGOUT -> System.out.println("I am LOGOUT.\t\t" + Command.LOGOUT.getDescription());
                 case BOOKS_ALL -> System.out.println("I am BOOKS_ALL.\t\t" + Command.BOOKS_ALL.getDescription());
+                case BOOKS_ADD -> {
+//                    Book test = new Book.Builder(new Author("Ivan", "Georgiev", "Bulgariq"),
+//                            "Probna kniga",
+//                            2024,
+//                            "123456789")
+//                            .keyWords("probni dumi, proba, 123")
+//                            .genre(Genre.CHILDRENS)
+//                            .rating(Rating.FIVE)
+//                            .description("ne znam kakvo da napisha, placeholder i guess")
+//                            .build();
+//                    WriteBooks writer = new WriteBooks();
+//                    BookList.getInstance().add(test);
+//                    try {
+//                        writer.writeFile(BookList.getInstance().getBookList());
+//                    } catch (Exception ex) {
+//                        System.out.println("prosto proba");
+//                    }
+                    ReadBooks reader = new ReadBooks();
+                    reader.read();
+                    for (Book book : BookList.getInstance().getBookList()) {
+                        System.out.println(book.toString());
+                    }
+                }
                 case BOOKS_INFO -> System.out.println("I am BOOKS_INFO.\t\t" + Command.BOOKS_INFO.getDescription());
                 case BOOKS_FIND -> System.out.println("I am BOOKS_FIND.\t\t" + Command.BOOKS_FIND.getDescription());
                 case BOOKS_SORT -> System.out.println("I am BOOKS_SORT.\t\t" + Command.BOOKS_SORT.getDescription());
