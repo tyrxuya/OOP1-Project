@@ -52,8 +52,8 @@ public class ReadBooks implements FileReadable {
                                     element.getElementsByTagName("description").item(0).getTextContent() : null)
                             .genre(element.getElementsByTagName("genre").getLength() != 0 ?
                                     Genre.valueOf(element.getElementsByTagName("genre").item(0).getTextContent()) : null)
-                            .keyWords(element.getElementsByTagName("keywords").getLength() != 0 ?
-                                    element.getElementsByTagName("keywords").item(0).getTextContent() : null)
+                            .keyWords(element.getElementsByTagName("keyWords").getLength() != 0 ?
+                                    element.getElementsByTagName("keyWords").item(0).getTextContent() : null)
                             .rating(element.getElementsByTagName("rating").getLength() != 0 ?
                                     Rating.valueOf(element.getElementsByTagName("rating").item(0).getTextContent()) : null)
                             .build();
