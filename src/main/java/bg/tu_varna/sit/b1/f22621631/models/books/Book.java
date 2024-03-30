@@ -72,7 +72,7 @@ public class Book {
                 .append("\nTitle: ")
                 .append(title)
                 .append(genre == null ? "" : "\nGenre: ")
-                .append(genre == null ? "" : genre.getGenre())
+                .append(genre == null ? "" : genre.getText())
                 .append(description == null || description.isBlank() ? "" : "\nDescription: ")
                 .append(description == null || description.isBlank() ? "" : description)
                 .append("\nYear published: ")
@@ -80,7 +80,7 @@ public class Book {
                 .append(keyWords == null || keyWords.isEmpty() ? "" : "\nKey words: ")
                 .append(keyWords == null || keyWords.isEmpty() ? "" : keyWords)
                 .append(rating == null ? "" : "\nRating: ")
-                .append(rating == null ? "" : rating.getRating())
+                .append(rating == null ? "" : rating.getText())
                 .append("\nISBN: ")
                 .append(isbn);
 

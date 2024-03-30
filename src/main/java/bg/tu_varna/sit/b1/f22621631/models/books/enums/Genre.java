@@ -27,13 +27,13 @@ public enum Genre {
     TAROT("Tarot"),
     TEXTBOOK("Textbook");
 
-    private final String genre;
+    private final String genreText;
 
-    private Genre(String genre) {
-        this.genre = genre;
+    private Genre(String genreText) {
+        this.genreText = genreText;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getText() {
+        return genreText;
     }
 }

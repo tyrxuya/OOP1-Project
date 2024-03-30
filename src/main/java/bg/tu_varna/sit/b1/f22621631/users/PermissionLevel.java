@@ -10,7 +10,7 @@ public enum PermissionLevel {
         this.permissionLevel = permissionLevel;
     }
 
-    public String getPermissionLevel() {
+    public String toString() {
         return permissionLevel;
     }
 }

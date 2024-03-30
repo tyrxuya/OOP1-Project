@@ -18,7 +18,7 @@ public enum Rating {
         this.rating = rating;
     }
 
-    public Double getRating() {
-        return rating;
+    public String getText() {
+        return rating.toString();
     }
 }
