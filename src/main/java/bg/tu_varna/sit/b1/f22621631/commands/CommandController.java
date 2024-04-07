@@ -48,7 +48,31 @@ public class CommandController {
                 }
                 case LOGIN -> System.out.println("I am LOGIN.\t\t" + Command.LOGIN.getDescription());
                 case LOGOUT -> System.out.println("I am LOGOUT.\t\t" + Command.LOGOUT.getDescription());
-                case BOOKS_ALL -> System.out.println("I am BOOKS_ALL.\t\t" + Command.BOOKS_ALL.getDescription());
+                //will fix this in the future
+                case BOOKS_ALL -> {
+                    ReadBooks reader = new ReadBooks();
+                    reader.read();
+                    System.out.printf("%-10s%-15s%-15s%-40s%-20s%-30s%-15s%-15s\n",
+                            "author",
+                            "title",
+                            "genre",
+                            "description",
+                            "year published",
+                            "key words",
+                            "rating",
+                            "isbn");
+                    for (Book book : BookList.getInstance().getBookList()) {
+                        System.out.printf("%-10s%-15s%-15s%-40s%-20s%-30s%-15s%-15s\n",
+                                book.getAuthor().toString(),
+                                book.getTitle(),
+                                book.getGenre().getText(),
+                                book.getDescription(),
+                                book.getPublishingYear(),
+                                book.getKeyWords(),
+                                book.getRating().getText(),
+                                book.getIsbn());
+                    }
+                }
                 case BOOKS_ADD -> {
 //                    Book test = new Book.Builder(new Author("Ivan", "Georgiev", "Bulgariq"),
 //                            "Probna kniga",
@@ -66,11 +90,11 @@ public class CommandController {
 //                    } catch (Exception ex) {
 //                        System.out.println("prosto proba");
 //                    }
-                    ReadBooks reader = new ReadBooks();
-                    reader.read();
-                    for (Book book : BookList.getInstance().getBookList()) {
-                        System.out.println(book.toString());
-                    }
+//                    ReadBooks reader = new ReadBooks();
+//                    reader.read();
+//                    for (Book book : BookList.getInstance().getBookList()) {
+//                        System.out.println(book.toString());
+//                    }
                 }
                 case BOOKS_INFO -> System.out.println("I am BOOKS_INFO.\t\t" + Command.BOOKS_INFO.getDescription());
                 case BOOKS_FIND -> System.out.println("I am BOOKS_FIND.\t\t" + Command.BOOKS_FIND.getDescription());
