@@ -1,1 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><list><book><author><firstName>Ivan</firstName><lastName>Georgiev</lastName><country>Bulgariq</country></author><title>Probna kniga</title><publishingYear>2024</publishingYear><isbn>123456789</isbn><genre>CHILDRENS</genre><description>ne znam kakvo da napisha, placeholder i guess</description><keyWords>probni dumi, proba, 123</keyWords><rating>FIVE</rating></book></list>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<list>
+    <book>
+        <author>
+            <firstName>Ivan</firstName>
+            <lastName>Georgiev</lastName>
+            <country>Bulgariq</country>
+        </author>
+        <title>Probna kniga</title>
+        <publishingYear>2024</publishingYear>
+        <isbn>123456789</isbn>
+        <genre>CHILDRENS</genre>
+        <description>ne znam kakvo da napisha, placeholder i guess</description>
+        <keyWords>probni dumi, proba, 123</keyWords>
+        <rating>FIVE</rating>
+    </book>
+</list>
