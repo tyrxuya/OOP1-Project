@@ -62,7 +62,7 @@ public class ReadBooks implements FileReadable {
                 }
             }
 
-            System.out.println("Successfully opened books.xml!");
+//            System.out.println("Successfully opened books.xml!");
         } catch (Exception ex) {
             System.out.println("Error in reading books.xml!");
         }
