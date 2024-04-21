@@ -1,4 +1,4 @@
-package main.java.bg.tu_varna.sit.b1.f22621631.contracts;
+package main.java.bg.tu_varna.sit.b1.f22621631.contracts.files;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.Book;
 import org.w3c.dom.Document;
