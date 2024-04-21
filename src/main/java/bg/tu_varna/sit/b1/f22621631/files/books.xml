@@ -2,6 +2,19 @@
 <list>
     <book>
         <author>
+            <firstName>Ismeta</firstName>
+            <lastName>Ismailov</lastName>
+            <country>Bulgaria</country>
+        </author>
+        <title>Guide to being a cuntessa in 2024</title>
+        <publishingYear>2024</publishingYear>
+        <isbn>16</isbn>
+        <genre>HORROR</genre>
+        <keyWords>cunt, cunty, cuntessa, literal legend, bbc</keyWords>
+        <rating>FIVE</rating>
+    </book>
+    <book>
+        <author>
             <firstName>Ivan</firstName>
             <lastName>Georgiev</lastName>
             <country>Bulgariq</country>

@@ -1,8 +1,7 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.commands.write;
 
-import main.java.bg.tu_varna.sit.b1.f22621631.contracts.FileWritable;
+import main.java.bg.tu_varna.sit.b1.f22621631.contracts.files.FileWritable;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.Book;
-import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Genre;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
@@ -10,23 +9,26 @@ import org.w3c.dom.Text;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class WriteBooks extends GeneralWriter implements FileWritable {
-    private final String FILE_NAME = ".\\src\\main\\java\\bg\\tu_varna\\sit\\b1\\f22621631\\files\\books.xml";
-    private File file = new File(FILE_NAME);
+    private final String FILE_PATH = ".\\src\\main\\java\\bg\\tu_varna\\sit\\b1\\f22621631\\files\\";
+    private final String FILE_NAME = "books.xml";
+    private File file = new File(FILE_PATH.concat(FILE_NAME));
+
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    public String getFILE_PATH() {
+        return FILE_PATH;
+    }
 
     public void writeFile(List<Book> books) throws ParserConfigurationException {
-        writeXml(FILE_NAME, generateDocument(books));
+        writeXml(file.getAbsolutePath(), generateDocument(books));
     }
 
     @Override
@@ -95,14 +97,14 @@ public class WriteBooks extends GeneralWriter implements FileWritable {
                 book.appendChild(genre);
             }
 
-            if (!currentBook.getDescription().isBlank() || !currentBook.getDescription().isEmpty()) {
+            if (currentBook.getDescription() != null) {
                 Element description = document.createElement("description");
                 Text descriptionText = document.createTextNode(currentBook.getDescription());
                 description.appendChild(descriptionText);
                 book.appendChild(description);
             }
 
-            if (!currentBook.getKeyWords().isBlank() || !currentBook.getKeyWords().isEmpty()) {
+            if (currentBook.getKeyWords() != null) {
                 Element keyWords = document.createElement("keyWords");
                 Text keyWordsText = document.createTextNode(currentBook.getKeyWords());
                 keyWords.appendChild(keyWordsText);

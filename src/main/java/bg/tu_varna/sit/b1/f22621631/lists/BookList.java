@@ -9,10 +9,10 @@ import java.util.Set;
 
 public class BookList {
     private static BookList instance;
-    private Set<Book> bookList;
+    private List<Book> bookList;
 
     private BookList() {
-        bookList = new HashSet<>();
+        bookList = new ArrayList<>();
     }
 
     public static BookList getInstance() {
@@ -26,15 +26,34 @@ public class BookList {
         return new ArrayList<>(bookList);
     }
 
+    public void setBookList(List<Book> bookList) {
+        this.bookList = new ArrayList<>(bookList);
+    }
+
     public void add(Book book) {
-        if (!bookExists(book)) {
+        if (!bookExists(book.getIsbn())) {
             bookList.add(book);
         }
     }
 
-    public boolean bookExists(Book book) {
+    public void remove(Book book) {
+        if (bookExists(book.getIsbn())) {
+            bookList.remove(book);
+        }
+    }
+
+    public Book findBook(String isbn) {
+        for (Book book : bookList) {
+            if (book.getIsbn().equals(isbn)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
+    public boolean bookExists(String isbn) {
         for (Book currentBook : bookList) {
-            if (currentBook.getIsbn().equals(book.getIsbn())) {
+            if (currentBook.getIsbn().equals(isbn)) {
                 return true;
             }
         }

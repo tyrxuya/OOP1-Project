@@ -1,6 +1,6 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.commands.read;
 
-import main.java.bg.tu_varna.sit.b1.f22621631.contracts.FileReadable;
+import main.java.bg.tu_varna.sit.b1.f22621631.contracts.files.FileReadable;
 import main.java.bg.tu_varna.sit.b1.f22621631.lists.BookList;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.authors.Author;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.Book;

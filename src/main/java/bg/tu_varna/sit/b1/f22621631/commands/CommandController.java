@@ -1,6 +1,9 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.commands;
 
+import main.java.bg.tu_varna.sit.b1.f22621631.commands.controllers.BookController;
+import main.java.bg.tu_varna.sit.b1.f22621631.commands.controllers.UtilityController;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.read.ReadBooks;
+import main.java.bg.tu_varna.sit.b1.f22621631.commands.read.ReadUsers;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.write.WriteBooks;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.write.WriteUsers;
 import main.java.bg.tu_varna.sit.b1.f22621631.lists.BookList;
@@ -14,9 +17,12 @@ import main.java.bg.tu_varna.sit.b1.f22621631.users.User;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class CommandController {
     private static File openedFile = null;
+    private static final UtilityController utilityController = new UtilityController();
+    private static final BookController bookController = new BookController();
 
     public static void run(String command) {
         if (command.isBlank()) {
@@ -42,43 +48,48 @@ public class CommandController {
         try {
             switch (Command.valueOf(firstArg.toUpperCase())) {
                 case OPEN -> {
-                    String fileName = commandArgs[1];
-                    if (!(fileName.equals("books.xml") || fileName.equals("users.xml"))) {
-                        throw new FileNotFoundException("The file doesn't exist!");
+                    if (commandArgs.length == 1) {
+                        System.out.println(Command.valueOf(firstArg.toUpperCase()).getDescription());
+                        break;
                     }
-                    openedFile = new File(fileName);
-                    System.out.println("File " + fileName + " opened successfully!");
+                    openedFile = utilityController.open(commandArgs[1]);
+                    if (openedFile.getName().equals("books.xml")) {
+                        ReadBooks books = new ReadBooks();
+                        books.read();
+                    }
+                    if (openedFile.getName().equals("users.xml")) {
+                        ReadUsers users = new ReadUsers();
+                        users.read();
+                    }
+                    System.out.println("File " + openedFile.getName() + " opened successfully!");
                 }
                 case CLOSE -> {
+                    System.out.println("File " + openedFile.getName() + " closed successfully!");
+                    if (openedFile.getName().equals("books.xml")) {
+                        WriteBooks books = new WriteBooks();
+                        books.writeFile(BookList.getInstance().getBookList());
+                    }
+                    if (openedFile.getName().equals("users.xml")) {
+                        WriteUsers users = new WriteUsers();
+                        users.writeFile(UserList.getInstance().getUserList());
+                    }
                     openedFile = null;
                 }
                 case SAVE -> {
-                    if (openedFile == null) {
-                        throw new FileNotFoundException("The file doesn't exist!");
-                    }
-                    switch (openedFile.getName()) {
-                        case "books.xml" -> {
-                            WriteBooks booksWriter = new WriteBooks();
-                            booksWriter.writeFile(BookList.getInstance().getBookList());
-                        }
-                        case "users.xml" -> {
-                            WriteUsers usersWriter = new WriteUsers();
-                            usersWriter.writeFile(UserList.getInstance().getUserList());
-                        }
-                        default -> {
-                            System.out.println("File not found!");
-                        }
-                    }
+                    utilityController.save();
                 }
-                case SAVE_AS -> System.out.println("I am SAVE_AS.\t\t" + Command.SAVE_AS.getDescription());
-                case HELP -> {
-                    for (Command commandValue : Command.values()) {
-                        System.out.printf("%-20s%s\n", commandValue.getCommand().toUpperCase(), commandValue.getDescription());
+                case SAVE_AS -> {
+                    if (commandArgs.length == 1) {
+                        System.out.println(Command.valueOf(firstArg.toUpperCase()).getDescription());
+                        break;
                     }
+                    utilityController.saveAs(commandArgs[2]);
+                }
+                case HELP -> {
+                    utilityController.help();
                 }
                 case EXIT -> {
-                    System.out.println("I am EXIT.\t\t" + Command.EXIT.getDescription());
-                    System.exit(0);
+                    utilityController.exit();
                 }
                 case LOGIN -> {
                     if (openedFile == null) {
@@ -102,51 +113,9 @@ public class CommandController {
                 }
                 //will fix this in the future
                 case BOOKS_ALL -> {
-                    ReadBooks reader = new ReadBooks();
-                    reader.read();
-                    System.out.printf("%-10s%-15s%-15s%-40s%-20s%-30s%-15s%-15s\n",
-                            "author",
-                            "title",
-                            "genre",
-                            "description",
-                            "year published",
-                            "key words",
-                            "rating",
-                            "isbn");
-                    for (Book book : BookList.getInstance().getBookList()) {
-                        System.out.printf("%-10s%-15s%-15s%-40s%-20s%-30s%-15s%-15s\n",
-                                book.getAuthor().toString(),
-                                book.getTitle(),
-                                book.getGenre().getText(),
-                                book.getDescription(),
-                                book.getPublishingYear(),
-                                book.getKeyWords(),
-                                book.getRating().getText(),
-                                book.getIsbn());
-                    }
+                    bookController.all();
                 }
                 case BOOKS_ADD -> {
-//                    Book test = new Book.Builder(new Author("Ivan", "Georgiev", "Bulgariq"),
-//                            "Probna kniga",
-//                            2024,
-//                            "123456789")
-//                            .keyWords("probni dumi, proba, 123")
-//                            .genre(Genre.CHILDRENS)
-//                            .rating(Rating.FIVE)
-//                            .description("ne znam kakvo da napisha, placeholder i guess")
-//                            .build();
-//                    WriteBooks writer = new WriteBooks();
-//                    BookList.getInstance().add(test);
-//                    try {
-//                        writer.writeFile(BookList.getInstance().getBookList());
-//                    } catch (Exception ex) {
-//                        System.out.println("prosto proba");
-//                    }
-//                    ReadBooks reader = new ReadBooks();
-//                    reader.read();
-//                    for (Book book : BookList.getInstance().getBookList()) {
-//                        System.out.println(book.toString());
-//                    }
                     if (openedFile == null) {
                         throw new FileNotFoundException("The file doesn't exist!");
                     }
@@ -154,7 +123,7 @@ public class CommandController {
                         System.out.println("Cannot perform book operation while working on users file!");
                         break;
                     }
-                    System.out.println("I am BOOKS_ADD.\t\t" + Command.BOOKS_ADD.getDescription());
+                    bookController.add();
                 }
                 case BOOKS_INFO -> {
                     if (openedFile == null) {
@@ -164,7 +133,11 @@ public class CommandController {
                         System.out.println("Cannot perform book operation while working on users file!");
                         break;
                     }
-                    System.out.println("I am BOOKS_INFO.\t\t" + Command.BOOKS_INFO.getDescription());
+                    if (commandArgs.length == 2) {
+                        System.out.println(Command.valueOf(firstArg.toUpperCase()).getDescription());
+                        break;
+                    }
+                    bookController.info(commandArgs[2]);
                 }
                 case BOOKS_FIND -> {
                     if (openedFile == null) {
@@ -174,7 +147,11 @@ public class CommandController {
                         System.out.println("Cannot perform book operation while working on users file!");
                         break;
                     }
-                    System.out.println("I am BOOKS_FIND.\t\t" + Command.BOOKS_FIND.getDescription());
+                    if (commandArgs.length == 2) {
+                        System.out.println(Command.valueOf(firstArg.toUpperCase()).getDescription());
+                        break;
+                    }
+                    bookController.find(commandArgs[2], commandArgs[3]);
                 }
                 case BOOKS_SORT -> {
                     if (openedFile == null) {
@@ -184,7 +161,16 @@ public class CommandController {
                         System.out.println("Cannot perform book operation while working on users file!");
                         break;
                     }
-                    System.out.println("I am BOOKS_SORT.\t\t" + Command.BOOKS_SORT.getDescription());
+                    if (commandArgs.length == 2) {
+                        System.out.println(Command.valueOf(firstArg.toUpperCase()).getDescription());
+                        break;
+                    }
+                    if (commandArgs.length == 3) {
+                        bookController.sort(commandArgs[2], true);
+                    }
+                    else {
+                        bookController.sort(commandArgs[2], commandArgs[3].equalsIgnoreCase("asc"));
+                    }
                 }
                 case USERS_ADD -> {
                     if (openedFile == null) {
@@ -209,10 +195,8 @@ public class CommandController {
             }
         } catch (IllegalArgumentException ex) {
             System.out.println("Invalid command! Try again.");
-        } catch (FileNotFoundException ex) {
+        } catch (FileNotFoundException | ParserConfigurationException ex) {
             System.out.println(ex.getMessage());
-        } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
         }
     }
 }

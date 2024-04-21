@@ -19,6 +19,10 @@ public class Author {
         return lastName;
     }
 
+    public String getName() {
+        return firstName + " " + lastName;
+    }
+
     public String getCountry() {
         return country;
     }

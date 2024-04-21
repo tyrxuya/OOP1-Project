@@ -1,6 +1,6 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.commands.write;
 
-import main.java.bg.tu_varna.sit.b1.f22621631.contracts.FileWritable;
+import main.java.bg.tu_varna.sit.b1.f22621631.contracts.files.FileWritable;
 import org.w3c.dom.Document;
 
 import javax.xml.transform.OutputKeys;
