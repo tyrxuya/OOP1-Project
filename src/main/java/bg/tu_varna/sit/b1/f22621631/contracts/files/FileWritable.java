@@ -10,5 +10,5 @@ import java.util.ArrayList;
 
 public interface FileWritable {
     void write(Document document, OutputStream outputStream) throws TransformerException;
-    void writeXml(String fileName, Document document);
+    void writeXml(Document document);
 }

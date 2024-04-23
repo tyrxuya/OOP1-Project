@@ -42,13 +42,13 @@ public class BookList {
         }
     }
 
-    public Book findBook(String isbn) {
+    public Book findBook(String isbn) throws Exception {
         for (Book book : bookList) {
             if (book.getIsbn().equals(isbn)) {
                 return book;
             }
         }
-        return null;
+        throw new Exception("Book not found!");
     }
 
     public boolean bookExists(String isbn) {
