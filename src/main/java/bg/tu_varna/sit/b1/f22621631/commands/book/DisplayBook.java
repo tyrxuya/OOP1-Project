@@ -27,6 +27,10 @@ public class DisplayBook implements RunnableCommand {
             throw new Exception("Cannot perform book operations while working on users file!");
         }
 
+        if (AppData.getInstance().getActiveUser() == null) {
+            throw new Exception("Cannot perform this operation without having been logged in!");
+        }
+
         if (arguments.isEmpty()) {
             printAllBooks();
         } else {

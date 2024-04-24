@@ -27,7 +27,11 @@ public class SortBook implements RunnableCommand {
             throw new Exception("Cannot perform book operations while working on users file!");
         }
 
-        Boolean ascending = arguments.size() == 2 ? (arguments.get(1).equalsIgnoreCase("asc")) : true;
+        if (AppData.getInstance().getActiveUser() == null) {
+            throw new Exception("Cannot perform BOOKS_SORT without having been logged in!");
+        }
+
+        boolean ascending = arguments.size() != 2 || (arguments.get(1).equalsIgnoreCase("asc"));
         List<Book> tempBookList = BookList.getInstance().getBookList();
         Comparator<Book> bookComparator = null;
         switch (arguments.get(0)) {

@@ -24,6 +24,14 @@ public class AddBook implements RunnableCommand {
             throw new Exception("Cannot perform book operations while working on users file!");
         }
 
+        if (AppData.getInstance().getActiveUser() == null) {
+            throw new Exception("Cannot add book without being logged in!");
+        }
+
+        if (AppData.getInstance().getActiveUser().getPermissionLevel().getText().equals("User")) {
+            throw new Exception("Access denied, ADMINISTRATOR permission required!");
+        }
+
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter author name: ");
         String authorName = scanner.nextLine();

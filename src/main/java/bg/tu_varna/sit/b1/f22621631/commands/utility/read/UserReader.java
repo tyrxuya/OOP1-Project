@@ -44,15 +44,13 @@ public class UserReader implements FileReadable, RunnableCommand {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element)node;
                     user = new User(
-                            element.getElementsByTagName("name").item(0).getTextContent(),
+                            element.getElementsByTagName("username").item(0).getTextContent(),
                             element.getElementsByTagName("password").item(0).getTextContent(),
                             PermissionLevel.valueOf(element.getElementsByTagName("permissionLevel").item(0).getTextContent())
                     );
                     userList.add(user);
                 }
             }
-
-            System.out.println("Successfully opened users.xml!");
         } catch(Exception ex) {
             System.out.println("Error in reading users.xml!");
         }

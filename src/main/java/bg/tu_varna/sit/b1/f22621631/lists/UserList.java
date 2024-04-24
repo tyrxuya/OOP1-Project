@@ -9,10 +9,10 @@ import java.util.Set;
 
 public class UserList {
     private static UserList instance;
-    private Set<User> userList;
+    private List<User> userList;
 
     private UserList() {
-        userList = new HashSet<>();
+        userList = new ArrayList<>();
     }
 
     public static UserList getInstance() {
@@ -28,5 +28,28 @@ public class UserList {
 
     public void add(User user) {
         userList.add(user);
+    }
+
+    public void remove(String username) throws Exception {
+        User userToRemove = findUser(username);
+        userList.remove(userToRemove);
+    }
+
+    public User findUser(String username) throws Exception {
+        for (User user : userList) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        throw new Exception("User not found!");
+    }
+
+    public Boolean userExists(String username) {
+        for (User user : userList) {
+            if (user.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

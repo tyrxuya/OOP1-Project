@@ -3,6 +3,9 @@ package main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.write.BookWriter;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.write.UserWriter;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.data.AppDataManager;
+import main.java.bg.tu_varna.sit.b1.f22621631.lists.UserList;
+import main.java.bg.tu_varna.sit.b1.f22621631.users.PermissionLevel;
+import main.java.bg.tu_varna.sit.b1.f22621631.users.User;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
@@ -11,6 +14,7 @@ import java.io.FileNotFoundException;
 public class AppData {
     private static AppData instance = null;
     private File openedFile = null;
+    private User activeUser = null;
     private AppDataManager appDataManager;
 
     private AppData() {}
@@ -54,6 +58,14 @@ public class AppData {
                 throw new FileNotFoundException("File couldn't be found!");
             }
         }
+    }
+
+    public User getActiveUser() {
+        return activeUser;
+    }
+
+    public void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
     }
 
     public void updateAppDataManager() throws FileNotFoundException {

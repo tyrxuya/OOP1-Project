@@ -6,6 +6,7 @@ import main.java.bg.tu_varna.sit.b1.f22621631.lists.BookList;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.Book;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.List;
 
 public class FindBook implements RunnableCommand {
@@ -23,6 +24,10 @@ public class FindBook implements RunnableCommand {
 
         if (AppData.getInstance().getOpenedFile().getName().equals("users.xml")) {
             throw new Exception("Cannot perform book operations while working on users file!");
+        }
+
+        if (AppData.getInstance().getActiveUser() == null) {
+            throw new Exception("Cannot perform BOOKS_FIND without having been logged in!");
         }
 
         Book searchedBook = null;
@@ -71,8 +76,11 @@ public class FindBook implements RunnableCommand {
 
     private Book searchByTag(String value) throws Exception {
         for (Book book : BookList.getInstance().getBookList()) {
-            if (book.getKeyWords().contains(value)) {
-                return book;
+            List<String> keyWords = Arrays.stream(book.getKeyWords().split(", ")).toList();
+            for (String keyWord : keyWords) {
+                if (keyWord.equalsIgnoreCase(value)) {
+                    return book;
+                }
             }
         }
         throw new Exception("Book not found!");

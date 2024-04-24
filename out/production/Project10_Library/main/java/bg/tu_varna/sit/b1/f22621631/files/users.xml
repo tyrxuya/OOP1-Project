@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<list>
+    <user>
+        <username>vankata</username>
+        <password>22621631</password>
+        <permissionLevel>USER</permissionLevel>
+    </user>
+    <user>
+        <username>pesho</username>
+        <password>12345</password>
+        <permissionLevel>ADMINISTRATOR</permissionLevel>
+    </user>
+    <user>
+        <username>admin</username>
+        <password>i&lt;3c++</password>
+        <permissionLevel>ADMINISTRATOR</permissionLevel>
+    </user>
+</list>

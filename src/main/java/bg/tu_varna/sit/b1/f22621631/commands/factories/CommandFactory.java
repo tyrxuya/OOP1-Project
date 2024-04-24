@@ -2,6 +2,7 @@ package main.java.bg.tu_varna.sit.b1.f22621631.commands.factories;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.Command;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.book.*;
+import main.java.bg.tu_varna.sit.b1.f22621631.commands.user.*;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.main.*;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
 
@@ -34,14 +35,10 @@ public class CommandFactory {
             case BOOKS_FIND -> new FindBook(arguments);
             case BOOKS_SORT -> new SortBook(arguments);
 
-//            case LOGIN -> new Login();
-//            case LOGOUT -> new Logout();
-//            case USERS_ADD -> new AddUser();
-//            case USERS_REMOVE -> new RemoveUser();
-            case LOGIN -> null;
-            case LOGOUT -> null;
-            case USERS_ADD -> null;
-            case USERS_REMOVE -> null;
+            case LOGIN -> new Login();
+            case LOGOUT -> new Logout();
+            case USERS_ADD -> new AddUser(arguments);
+            case USERS_REMOVE -> new RemoveUser(arguments);
         };
     }
 }

@@ -2,16 +2,17 @@
 <list>
     <book>
         <author>
-            <firstName>Ismeta</firstName>
-            <lastName>Ismailov</lastName>
-            <country>Bulgaria</country>
+            <firstName>Tahereh</firstName>
+            <lastName>Mafi</lastName>
+            <country>USA</country>
         </author>
-        <title>Guide to being a cuntessa in 2024</title>
-        <publishingYear>2024</publishingYear>
-        <isbn>16</isbn>
-        <genre>HORROR</genre>
-        <keyWords>cunt, cunty, cuntessa, literal legend, bbc</keyWords>
-        <rating>FIVE</rating>
+        <title>Shatter Me</title>
+        <publishingYear>2011</publishingYear>
+        <isbn>11223344</isbn>
+        <genre>ROMANCE</genre>
+        <description>A tale about a deathly touch.</description>
+        <keyWords>Girl, Romance, Superpowers, Teen</keyWords>
+        <rating>FOUR_POINT_FIVE</rating>
     </book>
     <book>
         <author>
@@ -25,6 +26,19 @@
         <genre>CHILDRENS</genre>
         <description>ne znam kakvo da napisha, placeholder i guess</description>
         <keyWords>probni dumi, proba, 123</keyWords>
+        <rating>FIVE</rating>
+    </book>
+    <book>
+        <author>
+            <firstName>Ismeta</firstName>
+            <lastName>Ismailov</lastName>
+            <country>Bulgaria</country>
+        </author>
+        <title>Guide to being a cuntessa in 2024</title>
+        <publishingYear>2024</publishingYear>
+        <isbn>16</isbn>
+        <genre>HORROR</genre>
+        <keyWords>cunt, cunty, cuntessa, literal legend, bbc</keyWords>
         <rating>FIVE</rating>
     </book>
 </list>

@@ -24,6 +24,14 @@ public class RemoveBook implements RunnableCommand {
             throw new Exception("Cannot perform book operations while working on users file!");
         }
 
+        if (AppData.getInstance().getActiveUser() == null) {
+            throw new Exception("Cannot remove book without being logged in!");
+        }
+
+        if (AppData.getInstance().getActiveUser().getPermissionLevel().getText().equals("User")) {
+            throw new Exception("Access denied, ADMINISTRATOR permission required!");
+        }
+
         BookList books = BookList.getInstance();
         books.remove(books.findBook(arguments.get(0)));
     }
