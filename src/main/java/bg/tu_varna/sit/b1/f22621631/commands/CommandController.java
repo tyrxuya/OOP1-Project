@@ -1,6 +1,8 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.commands;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.factories.CommandFactory;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.LibraryException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.IllegalCommandException;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -34,6 +36,9 @@ public class CommandController {
     public static void run(String command) {
         List<String> arguments = Arrays.stream(command.split(" ")).toList();
         command = parseInput(command);
+        if (checkInput(command)) {
+            throw new IllegalCommandException("Command doesn't exist! Type \"help\" for more information.");
+        }
         if (command == null) {
             return;
         }
@@ -43,8 +48,6 @@ public class CommandController {
             //CommandFactory.getInstance().getCommand(Command.valueOf(command), arguments).execute();
             Command executableCommand = Command.valueOf(command);
             commands.get(executableCommand).getCommand(executableCommand, arguments).execute();
-        } catch (IllegalArgumentException ex) {
-            System.out.println("Invalid command! Try again.");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -73,5 +76,14 @@ public class CommandController {
         }
 
         return firstArg.toUpperCase();
+    }
+
+    private static Boolean checkInput(String input) {
+        for (Command command : Command.values()) {
+            if (command.getCommand().equals(input)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

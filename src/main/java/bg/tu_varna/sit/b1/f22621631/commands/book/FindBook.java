@@ -2,6 +2,11 @@ package main.java.bg.tu_varna.sit.b1.f22621631.commands.book;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.IllegalArgumentsException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.BookFileNotOpenedException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.WrongFileOpenedException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.lists.BookNotFoundException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.lists.UserNotFoundException;
 import main.java.bg.tu_varna.sit.b1.f22621631.lists.BookList;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.Book;
 
@@ -17,17 +22,17 @@ public class FindBook implements RunnableCommand {
     }
 
     @Override
-    public void execute() throws Exception {
+    public void execute() {
         if (AppData.getInstance().getOpenedFile() == null) {
-            throw new FileNotFoundException("Cannot perform book operations without opening the file!"); //BookFileNotOpenedException
+            throw new BookFileNotOpenedException("Cannot perform book operations without opening the file!"); //BookFileNotOpenedException
         }
 
         if (AppData.getInstance().getOpenedFile().getName().equals("users.xml")) {
-            throw new Exception("Cannot perform book operations while working on users file!"); //WrongFileOpenedException
+            throw new WrongFileOpenedException("Cannot perform book operations while working on users file!"); //WrongFileOpenedException
         }
 
         if (AppData.getInstance().getActiveUser() == null) {
-            throw new Exception("Cannot perform BOOKS_FIND without having been logged in!"); //UserNotFoundException
+            throw new UserNotFoundException("Cannot perform BOOKS_FIND without having been logged in!"); //UserNotFoundException
         }
 
         Book searchedBook;
@@ -50,31 +55,31 @@ public class FindBook implements RunnableCommand {
             case "tag" -> {
                 searchedBook = searchByTag(arguments.get(1));
             }
-            default -> throw new Exception("Invalid criteria!"); //IllegalArgumentsException
+            default -> throw new IllegalArgumentsException("Invalid criteria!"); //IllegalArgumentsException
         }
 
         System.out.println(searchedBook);
     }
 
-    private Book searchByTitle(String value) throws Exception {
+    private Book searchByTitle(String value) {
         for (Book book : BookList.getInstance().getBookList()) {
             if (book.getTitle().equalsIgnoreCase(value)) {
                 return book;
             }
         }
-        throw new Exception("Book not found!"); //InvalidBookException
+        throw new BookNotFoundException("Book with such title not found!"); //BookNotFoundException...
     }
 
-    private Book searchByAuthor(String value) throws Exception {
+    private Book searchByAuthor(String value) {
         for (Book book : BookList.getInstance().getBookList()) {
             if (book.getAuthor().getName().equalsIgnoreCase(value)) {
                 return book;
             }
         }
-        throw new Exception("Book not found!"); //InvalidBookException
+        throw new BookNotFoundException("Book with such author not found!"); //InvalidBookException
     }
 
-    private Book searchByTag(String value) throws Exception {
+    private Book searchByTag(String value) {
         for (Book book : BookList.getInstance().getBookList()) {
             List<String> keyWords = Arrays.stream(book.getKeyWords().split(", ")).toList();
             for (String keyWord : keyWords) {
@@ -83,6 +88,6 @@ public class FindBook implements RunnableCommand {
                 }
             }
         }
-        throw new Exception("Book not found!"); //InvalidBookException
+        throw new BookNotFoundException("Book with such tag not found!"); //InvalidBookException
     }
 }

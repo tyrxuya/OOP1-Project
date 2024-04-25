@@ -3,24 +3,28 @@ package main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.write.BookWriter;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.write.UserWriter;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.data.AppDataManager;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.LibraryFileNotFoundException;
 import main.java.bg.tu_varna.sit.b1.f22621631.lists.UserList;
 import main.java.bg.tu_varna.sit.b1.f22621631.users.PermissionLevel;
 import main.java.bg.tu_varna.sit.b1.f22621631.users.User;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Objects;
 
 public class AppData {
     private static AppData instance = null;
     private File openedFile = null;
-    private User activeUser = new User("admin", "i<3c++", PermissionLevel.ADMINISTRATOR);
+    private User activeUser = null;
     private AppDataManager appDataManager;
 
-    private AppData() throws Exception {}
+    private AppData() {}
 
-    public static AppData getInstance() throws Exception {
+    public static AppData getInstance() {
         if (instance == null) {
             instance = new AppData();
         }
@@ -35,9 +39,9 @@ public class AppData {
         this.openedFile = openedFile;
     }
 
-    public void load(File file) throws Exception {
+    public void load(File file) throws IOException, ParserConfigurationException, TransformerException, SAXException {
         if (!file.getName().equals("books.xml") && !file.getName().equals("users.xml")) {
-            throw new FileNotFoundException("File couldn't be found!");
+            throw new LibraryFileNotFoundException("File couldn't be found!");
         }
 
         this.openedFile = file;
@@ -45,9 +49,9 @@ public class AppData {
         appDataManager.load();
     }
 
-    public void unload() throws Exception {
+    public void unload() throws IOException, ParserConfigurationException, TransformerException, SAXException {
         if (Objects.isNull(appDataManager)) {
-            throw new Exception("No file open to save!");
+            throw new LibraryFileNotFoundException("No file open to save!");
         }
 
         appDataManager.unload();
@@ -55,9 +59,9 @@ public class AppData {
         appDataManager = null;
     }
 
-    public void save(File file) throws Exception {
+    public void save(File file) throws ParserConfigurationException, IOException, TransformerException {
         if (Objects.isNull(openedFile)) {
-            throw new Exception("No file open to save!");
+            throw new LibraryFileNotFoundException("No file open to save!");
         }
 
         switch (openedFile.getName()) {
@@ -72,7 +76,7 @@ public class AppData {
                 userWriter.execute();
             }
             default -> {
-                throw new FileNotFoundException("File couldn't be found!");
+                throw new LibraryFileNotFoundException("File couldn't be found!");
             }
         }
     }

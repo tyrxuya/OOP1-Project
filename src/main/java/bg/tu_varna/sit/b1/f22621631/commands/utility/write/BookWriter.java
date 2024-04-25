@@ -10,8 +10,11 @@ import org.w3c.dom.Text;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 public class BookWriter extends GeneralWriter implements FileWritable {
@@ -26,25 +29,21 @@ public class BookWriter extends GeneralWriter implements FileWritable {
     }
 
     @Override
-    public void execute() throws ParserConfigurationException {
+    public void execute() throws ParserConfigurationException, IOException, TransformerException {
         writeFile(BookList.getInstance().getBookList());
         setFile(new File(getFILE_PATH().concat("books.xml")));
     }
 
-    public void writeFile(List<Book> books) throws ParserConfigurationException {
+    public void writeFile(List<Book> books) throws ParserConfigurationException, IOException, TransformerException {
         writeXml(generateDocument(books));
     }
 
     @Override
-    public void writeXml(Document document) {
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            write(document, new FileOutputStream(file));
-        } catch(Exception ex) {
-            System.out.println("Error in writing to file books.xml!");
+    public void writeXml(Document document) throws IOException, TransformerException {
+        if (!file.exists()) {
+            file.createNewFile();
         }
+        write(document, new FileOutputStream(file));
     }
 
     private Document generateDocument(List<Book> books) throws ParserConfigurationException {

@@ -10,8 +10,11 @@ import org.w3c.dom.Text;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 public class UserWriter extends GeneralWriter implements FileWritable {
@@ -26,26 +29,22 @@ public class UserWriter extends GeneralWriter implements FileWritable {
     }
 
     @Override
-    public void execute() throws Exception {
+    public void execute() throws ParserConfigurationException, IOException, TransformerException {
         writeFile(UserList.getInstance().getUserList());
         setFile(new File(getFILE_PATH().concat("users.xml")));
     }
 
-    public void writeFile(List<User> users) throws ParserConfigurationException {
+    public void writeFile(List<User> users) throws ParserConfigurationException, IOException, TransformerException {
         writeXml(generateDocument(users));
     }
 
     @Override
-    public void writeXml(Document document) {
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            write(document, new FileOutputStream(file));
-        } catch (Exception ex) {
-            System.out.println("Error in writing to users.xml!");
+    public void writeXml(Document document) throws IOException, TransformerException {
+        if (!file.exists()) {
+            file.createNewFile();
         }
+
+        write(document, new FileOutputStream(file));
     }
 
     private Document generateDocument(List<User> users) throws ParserConfigurationException {

@@ -5,6 +5,9 @@ import main.java.bg.tu_varna.sit.b1.f22621631.lists.UserList;
 import main.java.bg.tu_varna.sit.b1.f22621631.users.PermissionLevel;
 import main.java.bg.tu_varna.sit.b1.f22621631.users.User;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +15,7 @@ public class UserInitializer implements RunnableCommand {
     private final UserWriter userWriter = new UserWriter();
 
     @Override
-    public void execute() throws Exception {
+    public void execute() throws ParserConfigurationException, IOException, TransformerException {
         User initialUser = new User("admin", "i<3c++", PermissionLevel.ADMINISTRATOR);
         UserList.getInstance().add(initialUser);
         userWriter.writeFile(UserList.getInstance().getUserList());

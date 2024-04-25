@@ -2,34 +2,42 @@ package main.java.bg.tu_varna.sit.b1.f22621631.commands.book;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.BookFileNotOpenedException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.WrongFileOpenedException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.lists.UserNotFoundException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.authors.InvalidAuthorException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.authors.InvalidCountryException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.books.InvalidBookIsbnException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.books.InvalidBookTitleException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.books.InvalidBookYearException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.books.InvalidRatingException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.users.InvalidPermissionLevelException;
 import main.java.bg.tu_varna.sit.b1.f22621631.lists.BookList;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.authors.Author;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.Book;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Genre;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Rating;
 
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class AddBook implements RunnableCommand {
     @Override
-    public void execute() throws Exception {
+    public void execute() {
         if (AppData.getInstance().getOpenedFile() == null) {
-            throw new FileNotFoundException("Cannot perform book operations without opening the file!"); //BookFileNotOpenedException
+            throw new BookFileNotOpenedException("Cannot perform book operations without opening the file!"); //BookFileNotOpenedException
         }
 
         if (AppData.getInstance().getOpenedFile().getName().equals("users.xml")) {
-            throw new Exception("Cannot perform book operations while working on users file!"); //WrongFileOpenedException
+            throw new WrongFileOpenedException("Cannot perform book operations while working on users file!"); //WrongFileOpenedException
         }
 
         if (AppData.getInstance().getActiveUser() == null) {
-            throw new Exception("Cannot add book without being logged in!"); //UserNotFoundException
+            throw new UserNotFoundException("Cannot add book without being logged in!"); //UserNotFoundException
         }
 
         if (AppData.getInstance().getActiveUser().getPermissionLevel().getText().equals("User")) {
-            throw new Exception("Access denied, ADMINISTRATOR permission required!"); //PermissionLevelException
+            throw new InvalidPermissionLevelException("Access denied, ADMINISTRATOR permission required!"); //PermissionLevelException
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -37,21 +45,21 @@ public class AddBook implements RunnableCommand {
         String authorName = scanner.nextLine();
 
         if (Objects.isNull(authorName)) {
-            //InvalidAuthorException
+            throw new InvalidAuthorException("Invalid author name!");
         }
 
         System.out.print("Enter author country: ");
         String authorCountry = scanner.nextLine();
 
         if (Objects.isNull(authorCountry)) {
-            //InvalidCountryException
+            throw new InvalidCountryException("Invalid country!");
         }
 
         System.out.print("Enter book title: ");
         String bookTitle = scanner.nextLine();
 
         if (Objects.isNull(bookTitle)) {
-            //InvalidBookTitleException
+            throw new InvalidBookTitleException("Invalid book title!");
         }
 
         System.out.print("Enter book publishing year: ");
@@ -59,13 +67,13 @@ public class AddBook implements RunnableCommand {
         scanner.nextLine();
 
         if (bookYear <= 0) {
-            //InvalidBookYearException
+            throw new InvalidBookYearException("Year cannot be negative!");
         }
         System.out.print("Enter book ISBN: ");
         String bookIsbn = scanner.nextLine();
 
         if (BookList.getInstance().bookExists(bookIsbn)) {
-            throw new Exception("Book with such ISBN already exists!"); //InvalidBookIsbnException
+            throw new InvalidBookIsbnException("Book with such ISBN already exists!"); //InvalidBookIsbnException
         }
 
         Book.Builder tempBook = new Book.Builder(
@@ -104,7 +112,7 @@ public class AddBook implements RunnableCommand {
             case "4.0" -> Rating.FOUR;
             case "4.5" -> Rating.FOUR_POINT_FIVE;
             case "5.0" -> Rating.FIVE;
-            default -> throw new IllegalStateException("Unexpected value: " + tempRating); //InvalidRatingException
+            default -> throw new InvalidRatingException("Unexpected value: " + tempRating); //InvalidRatingException
         });
 
         if (Objects.nonNull(bookGenre)) {

@@ -1,6 +1,7 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.lists;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.lists.UserNotFoundException;
 import main.java.bg.tu_varna.sit.b1.f22621631.users.User;
 
 import java.util.ArrayList;
@@ -33,18 +34,18 @@ public class UserList {
         }
     }
 
-    public void remove(String username) throws Exception {
+    public void remove(String username) {
         User userToRemove = findUser(username);
         userList.remove(userToRemove);
     }
 
-    public User findUser(String username) throws Exception {
+    public User findUser(String username) {
         for (User user : userList) {
             if (user.getUsername().equals(username)) {
                 return user;
             }
         }
-        throw new Exception("User not found!");
+        throw new UserNotFoundException("User not found!");
     }
 
     public Boolean userExists(String username) {

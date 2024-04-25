@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 
 public class Help implements RunnableCommand {
     @Override
-    public void execute() throws ParserConfigurationException, FileNotFoundException {
+    public void execute() {
         for (Command commandValue : Command.values()) {
             System.out.printf("%-20s%s\n", commandValue.getCommand().toUpperCase(), commandValue.getDescription());
         }

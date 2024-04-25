@@ -2,6 +2,11 @@ package main.java.bg.tu_varna.sit.b1.f22621631.commands.user;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.NoArgumentsException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.UserFileNotOpenedException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.WrongFileOpenedException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.users.InvalidPermissionLevelException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.users.InvalidUserException;
 import main.java.bg.tu_varna.sit.b1.f22621631.lists.UserList;
 
 import java.io.FileNotFoundException;
@@ -15,21 +20,25 @@ public class RemoveUser implements RunnableCommand {
     }
 
     @Override
-    public void execute() throws Exception {
+    public void execute() {
         if (AppData.getInstance().getOpenedFile() == null) {
-            throw new FileNotFoundException("Cannot perform user operations without opening the file!");
+            throw new UserFileNotOpenedException("Cannot perform user operations without opening the file!");
         }
 
         if (AppData.getInstance().getOpenedFile().getName().equals("books.xml")) {
-            throw new Exception("Cannot perform user operations while working on books file!");
+            throw new WrongFileOpenedException("Cannot perform user operations while working on books file!");
         }
 
         if (AppData.getInstance().getActiveUser() == null) {
-            throw new Exception("Cannot remove user without being logged in!");
+            throw new InvalidUserException("Cannot remove user without being logged in!");
         }
 
         if (AppData.getInstance().getActiveUser().getPermissionLevel().getText().equals("User")) {
-            throw new Exception("Access denied, ADMINISTRATOR permission required!");
+            throw new InvalidPermissionLevelException("Access denied, ADMINISTRATOR permission required!");
+        }
+
+        if (argument.isEmpty()) {
+            throw new NoArgumentsException("No arguments!");
         }
 
         UserList.getInstance().remove(argument.get(0));

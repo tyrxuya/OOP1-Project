@@ -5,6 +5,7 @@ import main.java.bg.tu_varna.sit.b1.f22621631.commands.book.*;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.user.*;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.main.*;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.IllegalCommandException;
 
 import java.util.List;
 

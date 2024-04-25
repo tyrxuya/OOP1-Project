@@ -1,5 +1,6 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.lists;
 
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.lists.BookNotFoundException;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.Book;
 
 import java.util.ArrayList;
@@ -42,13 +43,13 @@ public class BookList {
         }
     }
 
-    public Book findBook(String isbn) throws Exception {
+    public Book findBook(String isbn) {
         for (Book book : bookList) {
             if (book.getIsbn().equals(isbn)) {
                 return book;
             }
         }
-        throw new Exception("Book not found!");
+        throw new BookNotFoundException("Book not found!");
     }
 
     public boolean bookExists(String isbn) {
