@@ -26,7 +26,7 @@ public class UserWriter extends GeneralWriter implements FileWritable {
     }
 
     @Override
-    public void execute() throws ParserConfigurationException {
+    public void execute() throws Exception {
         writeFile(UserList.getInstance().getUserList());
         setFile(new File(getFILE_PATH().concat("users.xml")));
     }
@@ -51,8 +51,8 @@ public class UserWriter extends GeneralWriter implements FileWritable {
     private Document generateDocument(List<User> users) throws ParserConfigurationException {
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-
         Document document = documentBuilder.newDocument();
+
         Element root = document.createElement("list");
         document.appendChild(root);
 

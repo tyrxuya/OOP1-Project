@@ -17,34 +17,56 @@ public class AddBook implements RunnableCommand {
     @Override
     public void execute() throws Exception {
         if (AppData.getInstance().getOpenedFile() == null) {
-            throw new FileNotFoundException("Cannot perform book operations without opening the file!");
+            throw new FileNotFoundException("Cannot perform book operations without opening the file!"); //BookFileNotOpenedException
         }
 
         if (AppData.getInstance().getOpenedFile().getName().equals("users.xml")) {
-            throw new Exception("Cannot perform book operations while working on users file!");
+            throw new Exception("Cannot perform book operations while working on users file!"); //WrongFileOpenedException
         }
 
         if (AppData.getInstance().getActiveUser() == null) {
-            throw new Exception("Cannot add book without being logged in!");
+            throw new Exception("Cannot add book without being logged in!"); //UserNotFoundException
         }
 
         if (AppData.getInstance().getActiveUser().getPermissionLevel().getText().equals("User")) {
-            throw new Exception("Access denied, ADMINISTRATOR permission required!");
+            throw new Exception("Access denied, ADMINISTRATOR permission required!"); //PermissionLevelException
         }
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter author name: ");
         String authorName = scanner.nextLine();
+
+        if (Objects.isNull(authorName)) {
+            //InvalidAuthorException
+        }
+
         System.out.print("Enter author country: ");
         String authorCountry = scanner.nextLine();
 
+        if (Objects.isNull(authorCountry)) {
+            //InvalidCountryException
+        }
+
         System.out.print("Enter book title: ");
         String bookTitle = scanner.nextLine();
+
+        if (Objects.isNull(bookTitle)) {
+            //InvalidBookTitleException
+        }
+
         System.out.print("Enter book publishing year: ");
         Integer bookYear = scanner.nextInt();
         scanner.nextLine();
+
+        if (bookYear <= 0) {
+            //InvalidBookYearException
+        }
         System.out.print("Enter book ISBN: ");
         String bookIsbn = scanner.nextLine();
+
+        if (BookList.getInstance().bookExists(bookIsbn)) {
+            throw new Exception("Book with such ISBN already exists!"); //InvalidBookIsbnException
+        }
 
         Book.Builder tempBook = new Book.Builder(
                 new Author(
@@ -65,11 +87,11 @@ public class AddBook implements RunnableCommand {
         String tempDescription = scanner.nextLine();
         String bookDescription = (tempDescription.equals("s") ? null : tempDescription);
 
-        System.out.println("Enter key words (to skip press \"s\"): ");
+        System.out.print("Enter key words (to skip press \"s\"): ");
         String tempKeyWords = scanner.nextLine();
         String bookKeyWords = (tempKeyWords.equals("s") ? null : tempKeyWords);
 
-        System.out.println("Enter rating (to skip press \"s\"): ");
+        System.out.print("Enter rating (to skip press \"s\"): ");
         String tempRating = scanner.nextLine();
         Rating bookRating = (tempRating.equals("s") ? null : switch (tempRating) {
             case "0.0" -> Rating.NO_RATING;
@@ -82,7 +104,7 @@ public class AddBook implements RunnableCommand {
             case "4.0" -> Rating.FOUR;
             case "4.5" -> Rating.FOUR_POINT_FIVE;
             case "5.0" -> Rating.FIVE;
-            default -> throw new IllegalStateException("Unexpected value: " + tempRating);
+            default -> throw new IllegalStateException("Unexpected value: " + tempRating); //InvalidRatingException
         });
 
         if (Objects.nonNull(bookGenre)) {

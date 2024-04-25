@@ -20,15 +20,15 @@ public class DisplayBook implements RunnableCommand {
     @Override
     public void execute() throws Exception {
         if (AppData.getInstance().getOpenedFile() == null) {
-            throw new FileNotFoundException("Cannot perform book operations without opening the file!");
+            throw new FileNotFoundException("Cannot perform book operations without opening the file!"); //BookFileNotOpenedException
         }
 
         if (AppData.getInstance().getOpenedFile().getName().equals("users.xml")) {
-            throw new Exception("Cannot perform book operations while working on users file!");
+            throw new Exception("Cannot perform book operations while working on users file!"); //WrongFileOpenedException
         }
 
         if (AppData.getInstance().getActiveUser() == null) {
-            throw new Exception("Cannot perform this operation without having been logged in!");
+            throw new Exception("Cannot perform this operation without having been logged in!"); //UserNotFoundException
         }
 
         if (arguments.isEmpty()) {

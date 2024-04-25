@@ -52,6 +52,10 @@ public class BookList {
     }
 
     public boolean bookExists(String isbn) {
+        if (bookList.isEmpty()) {
+            return false;
+        }
+
         for (Book currentBook : bookList) {
             if (currentBook.getIsbn().equals(isbn)) {
                 return true;

@@ -19,18 +19,18 @@ public class FindBook implements RunnableCommand {
     @Override
     public void execute() throws Exception {
         if (AppData.getInstance().getOpenedFile() == null) {
-            throw new FileNotFoundException("Cannot perform book operations without opening the file!");
+            throw new FileNotFoundException("Cannot perform book operations without opening the file!"); //BookFileNotOpenedException
         }
 
         if (AppData.getInstance().getOpenedFile().getName().equals("users.xml")) {
-            throw new Exception("Cannot perform book operations while working on users file!");
+            throw new Exception("Cannot perform book operations while working on users file!"); //WrongFileOpenedException
         }
 
         if (AppData.getInstance().getActiveUser() == null) {
-            throw new Exception("Cannot perform BOOKS_FIND without having been logged in!");
+            throw new Exception("Cannot perform BOOKS_FIND without having been logged in!"); //UserNotFoundException
         }
 
-        Book searchedBook = null;
+        Book searchedBook;
         switch (arguments.get(0)) {
             case "title" -> {
                 StringBuilder title = new StringBuilder();
@@ -50,7 +50,7 @@ public class FindBook implements RunnableCommand {
             case "tag" -> {
                 searchedBook = searchByTag(arguments.get(1));
             }
-            default -> throw new Exception("Invalid criteria!");
+            default -> throw new Exception("Invalid criteria!"); //IllegalArgumentsException
         }
 
         System.out.println(searchedBook);
@@ -62,7 +62,7 @@ public class FindBook implements RunnableCommand {
                 return book;
             }
         }
-        throw new Exception("Book not found!");
+        throw new Exception("Book not found!"); //InvalidBookException
     }
 
     private Book searchByAuthor(String value) throws Exception {
@@ -71,7 +71,7 @@ public class FindBook implements RunnableCommand {
                 return book;
             }
         }
-        throw new Exception("Book not found!");
+        throw new Exception("Book not found!"); //InvalidBookException
     }
 
     private Book searchByTag(String value) throws Exception {
@@ -83,6 +83,6 @@ public class FindBook implements RunnableCommand {
                 }
             }
         }
-        throw new Exception("Book not found!");
+        throw new Exception("Book not found!"); //InvalidBookException
     }
 }

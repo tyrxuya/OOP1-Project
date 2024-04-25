@@ -1,21 +1,14 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.commands;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.factories.CommandFactory;
-import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.main.Exit;
-import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.main.Help;
-import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.main.Open;
-import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
 
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CommandController {
-    private static Map<Command, CommandFactory> commands = new HashMap<>();
+    private static final Map<Command, CommandFactory> commands = new HashMap<>();
 
     static {
         commands.put(Command.OPEN, CommandFactory.getInstance());
@@ -41,11 +34,15 @@ public class CommandController {
     public static void run(String command) {
         List<String> arguments = Arrays.stream(command.split(" ")).toList();
         command = parseInput(command);
+        if (command == null) {
+            return;
+        }
         int startingIndex = (command.startsWith("BOOKS") || command.startsWith("USERS") || command.startsWith("SAVE_AS") ? 2 : 1);
         arguments = arguments.subList(startingIndex, arguments.size());
-        //Here we will call the functionalities later when they are developed. For now, it's used for printing purposes
         try {
-            CommandFactory.getInstance().getCommand(Command.valueOf(command), arguments).execute();
+            //CommandFactory.getInstance().getCommand(Command.valueOf(command), arguments).execute();
+            Command executableCommand = Command.valueOf(command);
+            commands.get(executableCommand).getCommand(executableCommand, arguments).execute();
         } catch (IllegalArgumentException ex) {
             System.out.println("Invalid command! Try again.");
         } catch (Exception e) {
@@ -55,7 +52,7 @@ public class CommandController {
 
     private static String parseInput(String input) {
         if (input.isBlank()) {
-            return null;
+            return null; //enter sth idiot
         }
 
         String[] arguments = input.split(" ");

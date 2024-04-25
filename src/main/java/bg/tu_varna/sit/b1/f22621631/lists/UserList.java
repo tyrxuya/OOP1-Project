@@ -1,5 +1,6 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.lists;
 
+import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
 import main.java.bg.tu_varna.sit.b1.f22621631.users.User;
 
 import java.util.ArrayList;
@@ -27,7 +28,9 @@ public class UserList {
     }
 
     public void add(User user) {
-        userList.add(user);
+        if (!userExists(user.getUsername())) {
+            userList.add(user);
+        }
     }
 
     public void remove(String username) throws Exception {
