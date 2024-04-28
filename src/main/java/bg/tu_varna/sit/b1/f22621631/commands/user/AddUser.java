@@ -2,6 +2,7 @@ package main.java.bg.tu_varna.sit.b1.f22621631.commands.user;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.WrongSyntaxException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.UserFileNotOpenedException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.WrongFileOpenedException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.users.InvalidPermissionLevelException;
@@ -41,6 +42,10 @@ public class AddUser implements RunnableCommand {
             throw new InvalidPermissionLevelException("Access denied, ADMINISTRATOR permission required!"); //PermissionLevelException
         }
 
+        if (argument.isEmpty() || argument.size() == 1) {
+            throw new WrongSyntaxException("Wrong syntax! Expected: users add <userName> <password>");
+        }
+
         if (UserList.getInstance().userExists(argument.get(0))) {
             throw new InvalidUserException("User with such username already exists!"); //LoginException
         }
@@ -52,5 +57,7 @@ public class AddUser implements RunnableCommand {
         PermissionLevel permissionLevel = PermissionLevel.valueOf(permissionLevelText.equals("user") ? permissionLevelText.toUpperCase() : "ADMINISTRATOR");
 
         UserList.getInstance().add(new User(argument.get(0), argument.get(1), permissionLevel));
+
+        System.out.println("User added successfully!");
     }
 }

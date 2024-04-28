@@ -10,4 +10,9 @@
         <password>22621631</password>
         <permissionLevel>USER</permissionLevel>
     </user>
+    <user>
+        <username>pesho</username>
+        <password>12345</password>
+        <permissionLevel>ADMINISTRATOR</permissionLevel>
+    </user>
 </list>

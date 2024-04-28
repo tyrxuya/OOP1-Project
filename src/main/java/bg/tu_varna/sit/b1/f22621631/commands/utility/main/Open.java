@@ -1,11 +1,13 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.main;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
+import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.write.BookInitializer;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.write.UserInitializer;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.WrongSyntaxException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.FileAlreadyOpenedException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.WrongFileOpenedException;
+import main.java.bg.tu_varna.sit.b1.f22621631.lists.BookList;
 import main.java.bg.tu_varna.sit.b1.f22621631.lists.UserList;
 import org.xml.sax.SAXException;
 
@@ -50,6 +52,10 @@ public class Open implements RunnableCommand {
 
         if (file.getName().equals("users.xml") && UserList.getInstance().getUserList().isEmpty()) {
             (new UserInitializer()).execute();
+        }
+
+        if (file.getName().equals("books.xml") && BookList.getInstance().getBookList().isEmpty()) {
+            (new BookInitializer()).execute();
         }
 
         System.out.println("File " + argument.get(0) + " opened successfully!");

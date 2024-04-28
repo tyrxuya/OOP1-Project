@@ -2,6 +2,7 @@ package main.java.bg.tu_varna.sit.b1.f22621631.commands.book;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.WrongSyntaxException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.BookFileNotOpenedException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.WrongFileOpenedException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.lists.UserNotFoundException;
@@ -36,7 +37,12 @@ public class RemoveBook implements RunnableCommand {
             throw new InvalidPermissionLevelException("Access denied, ADMINISTRATOR permission required!"); //InvalidPermissionLevelException
         }
 
+        if (arguments.isEmpty()) {
+            throw new WrongSyntaxException("Wrong syntax! Expected: books remove <isbn>");
+        }
+
         BookList books = BookList.getInstance();
         books.remove(books.findBook(arguments.get(0)));
+        System.out.println("Book successfully removed!");
     }
 }

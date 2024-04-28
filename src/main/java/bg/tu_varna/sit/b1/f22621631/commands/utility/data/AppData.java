@@ -55,8 +55,8 @@ public class AppData {
         }
 
         appDataManager.unload();
-        this.openedFile = null;
-        appDataManager = null;
+        //this.openedFile = null;
+        //appDataManager = null;
     }
 
     public void save(File file) throws ParserConfigurationException, IOException, TransformerException {

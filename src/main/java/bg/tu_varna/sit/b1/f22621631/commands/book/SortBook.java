@@ -34,11 +34,16 @@ public class SortBook implements RunnableCommand {
             throw new UserNotFoundException("Cannot perform BOOKS_SORT without having been logged in!");
         }
 
+        if (arguments.isEmpty()) {
+            throw new WrongSyntaxException("Wrong syntax! Expected: books sort <title/author/year/rating> [<asc/desc>]");
+        }
+
         boolean ascending = arguments.size() != 2 || (arguments.get(1).equalsIgnoreCase("asc"));
         List<Book> tempBookList = BookList.getInstance().getBookList();
         Comparator<Book> bookComparator = getBookComparator();
         tempBookList.sort(ascending ? bookComparator : Collections.reverseOrder(bookComparator));
         BookList.getInstance().setBookList(tempBookList);
+        System.out.println("Sort successful!");
     }
 
     private Comparator<Book> getBookComparator() {

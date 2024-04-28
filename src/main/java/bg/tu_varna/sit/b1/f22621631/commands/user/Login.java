@@ -12,6 +12,7 @@ import main.java.bg.tu_varna.sit.b1.f22621631.users.User;
 
 import java.io.Console;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 
 public class Login implements RunnableCommand {
     @Override
@@ -33,17 +34,11 @@ public class Login implements RunnableCommand {
         String username = console.readLine("Enter username: ");
 
         if (!UserList.getInstance().userExists(username)) {
-            throw new InvalidUsernameException("User with such username already exists!");
+            throw new InvalidUsernameException("No user with such username found!");
         }
 
         char[] password = console.readPassword("Enter password: ");
-        StringBuilder passwordBuilder = new StringBuilder();
-        for (Character passwordChar : password) {
-            passwordBuilder.append(passwordChar);
-            System.out.print("*");
-        }
-        System.out.println();
-        String passwordText = passwordBuilder.toString();
+        String passwordText = new String(password);
 
         User attemptedUser = UserList.getInstance().findUser(username);
         if (!attemptedUser.getPassword().equals(passwordText)) {

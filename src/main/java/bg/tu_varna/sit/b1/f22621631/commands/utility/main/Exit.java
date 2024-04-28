@@ -15,6 +15,7 @@ public class Exit implements RunnableCommand {
         if (AppData.getInstance().getOpenedFile() != null) {
             AppData.getInstance().unload();
         }
+        System.out.println("Exiting...");
         System.exit(0);
     }
 }

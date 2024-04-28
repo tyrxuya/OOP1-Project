@@ -12,5 +12,6 @@ public class Logout implements RunnableCommand {
         }
 
         AppData.getInstance().setActiveUser(null);
+        System.out.println("Logged out!");
     }
 }

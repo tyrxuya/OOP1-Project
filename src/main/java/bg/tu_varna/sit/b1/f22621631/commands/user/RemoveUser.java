@@ -3,6 +3,7 @@ package main.java.bg.tu_varna.sit.b1.f22621631.commands.user;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.NoArgumentsException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.WrongSyntaxException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.UserFileNotOpenedException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.WrongFileOpenedException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.users.InvalidPermissionLevelException;
@@ -38,9 +39,10 @@ public class RemoveUser implements RunnableCommand {
         }
 
         if (argument.isEmpty()) {
-            throw new NoArgumentsException("No arguments!");
+            throw new WrongSyntaxException("Wrong syntax! Expected: users remove <username>");
         }
 
         UserList.getInstance().remove(argument.get(0));
+        System.out.println("User removed successfully!");
     }
 }

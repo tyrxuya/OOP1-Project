@@ -35,6 +35,9 @@ public class UserReader implements FileReadable, RunnableCommand {
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        if (FILE_NAME.length() <= 20) {
+            return;
+        }
         Document document = documentBuilder.parse(FILE_NAME);
 
         document.getDocumentElement().normalize();
