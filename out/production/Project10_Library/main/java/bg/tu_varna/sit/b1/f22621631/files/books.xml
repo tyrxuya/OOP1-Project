@@ -9,5 +9,8 @@
         <title>Shatter Me</title>
         <publishingYear>2011</publishingYear>
         <isbn>123456789</isbn>
+        <genre>ROMANCE</genre>
+        <description>A tale about a deathly touch.</description>
+        <rating>FIVE</rating>
     </book>
 </list>

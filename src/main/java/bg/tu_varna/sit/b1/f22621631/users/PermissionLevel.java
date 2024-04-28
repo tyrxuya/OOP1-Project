@@ -1,6 +1,7 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.users;
 
 public enum PermissionLevel {
+    NONE("none"),
     USER("User"),
     ADMINISTRATOR("Admin");
 

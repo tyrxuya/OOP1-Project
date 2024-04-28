@@ -10,14 +10,22 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
 import java.io.OutputStream;
 
 public abstract class GeneralWriter implements FileWritable, RunnableCommand {
-    private final String FILE_PATH = ".\\src\\main\\java\\bg\\tu_varna\\sit\\b1\\f22621631\\files\\";
+    private final String DEFAULT_PATH = ".\\src\\main\\java\\bg\\tu_varna\\sit\\b1\\f22621631\\files\\";
+    private String path;
 
-    public String getFILE_PATH() {
-        return FILE_PATH;
+    public String getDEFAULT_PATH() {
+        return DEFAULT_PATH;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     @Override

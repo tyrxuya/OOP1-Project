@@ -12,13 +12,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
 public class UserWriter extends GeneralWriter implements FileWritable {
-    private File file = new File(getFILE_PATH().concat("users.xml"));
+    private File file = new File(getDEFAULT_PATH().concat("users.xml"));
 
     public File getFile() {
         return file;
@@ -31,7 +30,7 @@ public class UserWriter extends GeneralWriter implements FileWritable {
     @Override
     public void execute() throws ParserConfigurationException, IOException, TransformerException {
         writeFile(UserList.getInstance().getUserList());
-        setFile(new File(getFILE_PATH().concat("users.xml")));
+        setFile(new File(getDEFAULT_PATH().concat("users.xml")));
     }
 
     public void writeFile(List<User> users) throws ParserConfigurationException, IOException, TransformerException {

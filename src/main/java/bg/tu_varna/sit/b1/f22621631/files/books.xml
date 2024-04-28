@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<list/>
+<list>
+    <book>
+        <author>
+            <firstName>Tahereh</firstName>
+            <lastName>Mafi</lastName>
+            <country>USA</country>
+        </author>
+        <title>Shatter Me</title>
+        <publishingYear>2011</publishingYear>
+        <isbn>123456789</isbn>
+        <genre>ROMANCE</genre>
+        <description>A tale about a deathly touch.</description>
+        <rating>FIVE</rating>
+    </book>
+</list>

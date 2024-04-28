@@ -16,9 +16,9 @@ public class BookData implements AppDataManager {
     @Override
     public void load() throws IOException, ParserConfigurationException, TransformerException, SAXException {
         RunnableCommand bookReader = new BookReader();
-        if (BookList.getInstance().getBookList().isEmpty()) {
-            unload();
-        }
+//        if (BookList.getInstance().getBookList().isEmpty()) {
+//            unload();
+//        }
         bookReader.execute();
     }
 

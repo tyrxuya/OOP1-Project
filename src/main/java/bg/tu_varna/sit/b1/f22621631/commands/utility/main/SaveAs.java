@@ -1,6 +1,5 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.main;
 
-import main.java.bg.tu_varna.sit.b1.f22621631.commands.Command;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.WrongSyntaxException;
@@ -8,13 +7,12 @@ import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.WrongSyntaxExc
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class SaveAs implements RunnableCommand {
     private List<String> argument;
-    private final String PATH = ".\\src\\main\\java\\bg\\tu_varna\\sit\\b1\\f22621631\\files\\";
 
     public SaveAs(List<String> argument) {
         this.argument = argument;
@@ -26,7 +24,22 @@ public class SaveAs implements RunnableCommand {
             throw new WrongSyntaxException("Wrong syntax: SAVE AS <fileName>");
         }
 
-        AppData.getInstance().save(new File(PATH.concat(argument.get(0))));
-        System.out.println("File " + argument.get(0) + " saved successfully!");
+        File fileToSave = new File(
+                argument.get(0).contains(File.separator) ?
+                        argument.get(0) :
+                        Paths.get(
+                                AppData.getInstance().
+                                        getOpenedFile().
+                                        getPath()
+                        ).
+                                toAbsolutePath().
+                                getParent().
+                                toString().
+                                concat(File.separator).
+                                concat(argument.get(0))
+        );
+
+        AppData.getInstance().save(fileToSave);
+        System.out.println("File " + fileToSave.getName() + " saved successfully!");
     }
 }

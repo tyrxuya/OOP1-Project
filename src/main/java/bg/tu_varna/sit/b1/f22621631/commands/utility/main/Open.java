@@ -5,6 +5,7 @@ import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.write.UserInitial
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.WrongSyntaxException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.FileAlreadyOpenedException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.WrongFileOpenedException;
 import main.java.bg.tu_varna.sit.b1.f22621631.lists.UserList;
 import org.xml.sax.SAXException;
 
@@ -30,6 +31,10 @@ public class Open implements RunnableCommand {
             throw new WrongSyntaxException("Wrong syntax: OPEN <fileName>");
         }
 
+        if (!argument.get(0).equals("books.xml") && !argument.get(0).equals("users.xml")) {
+            throw new WrongFileOpenedException("No file with such name found!");
+        }
+
         if (Objects.nonNull(AppData.getInstance().getOpenedFile())) {
             throw new FileAlreadyOpenedException("File already opened!");
         }
@@ -41,11 +46,11 @@ public class Open implements RunnableCommand {
         }
         AppData.getInstance().setOpenedFile(file);
 
+        AppData.getInstance().load(AppData.getInstance().getOpenedFile());
+
         if (file.getName().equals("users.xml") && UserList.getInstance().getUserList().isEmpty()) {
             (new UserInitializer()).execute();
         }
-
-        AppData.getInstance().load(AppData.getInstance().getOpenedFile());
 
         System.out.println("File " + argument.get(0) + " opened successfully!");
     }
