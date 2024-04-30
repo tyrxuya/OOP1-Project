@@ -18,6 +18,7 @@ public enum Command {
     BOOKS_INFO ("books info", "Prints all the information on a book by a given <ISBN_Value>.", PermissionLevel.USER),
     BOOKS_FIND ("books find", "Searches for a book by <title/author/tag>.", PermissionLevel.USER),
     BOOKS_SORT ("books sort", "Sorts the books by <title/author/year/rating> in <ASC(default)/DESC> order.", PermissionLevel.USER),
+    USERS_ALL ("users all", "Prints all the users in the system", PermissionLevel.USER),
     USERS_ADD ("users add", "Adds a user with <username> and <password> to the file.", PermissionLevel.ADMINISTRATOR),
     USERS_REMOVE ("users remove", "Removes a user with <username> from a file.", PermissionLevel.ADMINISTRATOR);
     private final String command;

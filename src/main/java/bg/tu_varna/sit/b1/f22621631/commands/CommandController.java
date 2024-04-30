@@ -30,6 +30,7 @@ public class CommandController {
 
         commands.put(Command.LOGIN, CommandFactory.getInstance());
         commands.put(Command.LOGOUT, CommandFactory.getInstance());
+        commands.put(Command.USERS_ALL, CommandFactory.getInstance());
         commands.put(Command.USERS_ADD, CommandFactory.getInstance());
         commands.put(Command.USERS_REMOVE, CommandFactory.getInstance());
     }
@@ -38,12 +39,15 @@ public class CommandController {
         List<String> arguments = Arrays.stream(command.split(" ")).toList();
         try {
             command = parseInput(command);
-            if (!checkInput(command)) {
-                throw new IllegalCommandException("Command doesn't exist! Type \"help\" for more information.");
-            }
+
             if (command == null) {
                 return;
             }
+
+            if (!checkInput(command)) {
+                throw new IllegalCommandException("Command doesn't exist! Type \"help\" for more information.");
+            }
+
             int startingIndex = (command.startsWith("BOOKS") || command.startsWith("USERS") || command.startsWith("SAVE_AS") ? 2 : 1);
             arguments = arguments.subList(startingIndex, arguments.size());
             //CommandFactory.getInstance().getCommand(Command.valueOf(command), arguments).execute();

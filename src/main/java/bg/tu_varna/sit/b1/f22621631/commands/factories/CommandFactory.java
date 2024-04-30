@@ -5,7 +5,6 @@ import main.java.bg.tu_varna.sit.b1.f22621631.commands.book.*;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.user.*;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.main.*;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
-import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.IllegalCommandException;
 
 import java.util.List;
 
@@ -39,6 +38,7 @@ public class CommandFactory {
 
             case LOGIN -> new Login();
             case LOGOUT -> new Logout();
+            case USERS_ALL -> new DisplayUser();
             case USERS_ADD -> new AddUser(arguments);
             case USERS_REMOVE -> new RemoveUser(arguments);
         };
