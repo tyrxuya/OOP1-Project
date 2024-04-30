@@ -34,7 +34,7 @@ public class SortBook implements RunnableCommand {
             throw new UserNotFoundException("Cannot perform BOOKS_SORT without having been logged in!");
         }
 
-        if (arguments.size() > 2) {
+        if (arguments.isEmpty() || arguments.size() > 2) {
             throw new WrongSyntaxException("Wrong syntax! Expected: books sort <title/author/year/rating> [<asc/desc>]");
         }
 

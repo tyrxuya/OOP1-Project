@@ -38,6 +38,7 @@ public class DisplayBook implements RunnableCommand {
 
     private void printAllBooks() {
         System.out.println("Available books in library:");
+        System.out.println();
         int index = 1;
         for (Book book : BookList.getInstance().getBookList()) {
             System.out.println(index++ + ".");

@@ -36,7 +36,7 @@ public class RemoveUser implements RunnableCommand {
             throw new InvalidPermissionLevelException("Access denied, ADMINISTRATOR permission required!");
         }
 
-        if (argument.isEmpty()) {
+        if (argument.size() != 1) {
             throw new WrongSyntaxException("Wrong syntax! Expected: users remove <username>");
         }
 

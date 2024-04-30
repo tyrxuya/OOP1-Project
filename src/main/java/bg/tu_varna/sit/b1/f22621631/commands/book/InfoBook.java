@@ -36,7 +36,7 @@ public class InfoBook implements RunnableCommand {
             throw new UserNotFoundException("Cannot perform this operation without having been logged in!"); //UserNotFoundException
         }
 
-        if (arguments.isEmpty()) {
+        if (arguments.size() != 1) {
             throw new WrongSyntaxException("Wrong syntax! Expected: books info <isbn>");
         }
 

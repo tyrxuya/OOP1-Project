@@ -28,8 +28,8 @@ public class Open implements RunnableCommand {
 
     @Override
     public void execute() throws IOException, ParserConfigurationException, TransformerException, SAXException {
-        if (argument.isEmpty()) {
-            throw new WrongSyntaxException("Wrong syntax: OPEN <fileName>");
+        if (argument.size() != 1) {
+            throw new WrongSyntaxException("Wrong syntax: open <fileName>");
         }
 
         if (!argument.get(0).equals("books.xml") && !argument.get(0).equals("users.xml")) {

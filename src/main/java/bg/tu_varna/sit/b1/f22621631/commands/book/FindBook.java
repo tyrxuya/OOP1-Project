@@ -37,7 +37,7 @@ public class FindBook implements RunnableCommand {
             throw new UserNotFoundException("Cannot perform BOOKS_FIND without having been logged in!"); //UserNotFoundException
         }
 
-        if (arguments.isEmpty() || arguments.size() == 1) {
+        if (arguments.size() != 2) {
             throw new WrongSyntaxException("Wrong syntax! Expected: books find <title/author/tag> <value>");
         }
 
@@ -51,7 +51,7 @@ public class FindBook implements RunnableCommand {
                     }
                     title.append(string).append(" ");
                 }
-                title.deleteCharAt(title.length() - 1);
+                title.deleteCharAt(title.lastIndexOf(" "));
                 searchedBooks = searchByTitle(title.toString());
             }
             case "author" -> {

@@ -20,4 +20,9 @@
         <password>petrova</password>
         <permissionLevel>USER</permissionLevel>
     </user>
+    <user>
+        <username>samito</username>
+        <password>password</password>
+        <permissionLevel>ADMINISTRATOR</permissionLevel>
+    </user>
 </list>

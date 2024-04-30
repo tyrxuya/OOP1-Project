@@ -46,21 +46,21 @@ public class AddBook implements RunnableCommand {
         System.out.print("Enter author name: ");
         String authorName = scanner.nextLine();
 
-        if (Objects.isNull(authorName)) {
+        if (Objects.isNull(authorName) || authorName.split(" ").length != 2) {
             throw new InvalidAuthorException("Invalid author name!");
         }
 
         System.out.print("Enter author country: ");
         String authorCountry = scanner.nextLine();
 
-        if (Objects.isNull(authorCountry)) {
+        if (Objects.isNull(authorCountry) || authorCountry.isEmpty() || authorCountry.isBlank()) {
             throw new InvalidCountryException("Invalid country!");
         }
 
         System.out.print("Enter book title: ");
         String bookTitle = scanner.nextLine();
 
-        if (Objects.isNull(bookTitle)) {
+        if (Objects.isNull(bookTitle) || bookTitle.isEmpty() || bookTitle.isBlank()) {
             throw new InvalidBookTitleException("Invalid book title!");
         }
 
@@ -78,10 +78,14 @@ public class AddBook implements RunnableCommand {
             throw new InvalidBookYearException("Year cannot be negative!");
         }
 
-        scanner.nextLine();
+        //scanner.nextLine();
 
         System.out.print("Enter book ISBN: ");
         String bookIsbn = scanner.nextLine();
+
+        if (Objects.isNull(bookIsbn) || bookIsbn.isEmpty() || bookIsbn.isBlank()) {
+            throw new InvalidBookIsbnException("Invalid ISBN!");
+        }
 
         if (BookList.getInstance().bookExists(bookIsbn)) {
             throw new InvalidBookIsbnException("Book with such ISBN already exists!"); //InvalidBookIsbnException
@@ -108,7 +112,7 @@ public class AddBook implements RunnableCommand {
         String tempDescription = scanner.nextLine();
         String bookDescription = (tempDescription.equalsIgnoreCase("s") ? null : tempDescription);
 
-        System.out.print("Enter key words (to skip or stop entering press \"s\"): ");
+        System.out.println("Enter key words (to skip or stop entering press \"s\"):");
         List<String> keyWords = new ArrayList<>();
         String tempKeyWords;
         while (!(tempKeyWords = scanner.nextLine()).equalsIgnoreCase("s")) {

@@ -36,7 +36,7 @@ public class RemoveBook implements RunnableCommand {
             throw new InvalidPermissionLevelException("Access denied, ADMINISTRATOR permission required!"); //InvalidPermissionLevelException
         }
 
-        if (arguments.isEmpty()) {
+        if (arguments.size() != 1) {
             throw new WrongSyntaxException("Wrong syntax! Expected: books remove <isbn>");
         }
 

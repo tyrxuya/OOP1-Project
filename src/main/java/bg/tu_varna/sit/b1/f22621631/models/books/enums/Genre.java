@@ -3,9 +3,9 @@ package main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums;
 public enum Genre {
     ACTION("Action"),
     CHICK_LIT("Chick lit"),
-    CHILDRENS("Children's"),
+    CHILDRENS("Childrens"),
     CLASSIC("Classic"),
-    COMING_OF_AGE("Coming-of-age"),
+    COMING_OF_AGE("Coming of age"),
     CONTEMPORARY("Contemporary"),
     DYSTOPIAN("Dystopian"),
     FAIRY_TALE("Fairy tale"),
@@ -23,7 +23,7 @@ public enum Genre {
     BIOGRAPHY("Biography"),
     PSYCHOLOGY("Psychology"),
     RELIGION("Religion"),
-    SELF_HELP("Self-help"),
+    SELF_HELP("Self help"),
     TAROT("Tarot"),
     TEXTBOOK("Textbook");
 
