@@ -8,8 +8,6 @@ import main.java.bg.tu_varna.sit.b1.f22621631.users.User;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserInitializer implements RunnableCommand {
     private final UserWriter userWriter = new UserWriter();

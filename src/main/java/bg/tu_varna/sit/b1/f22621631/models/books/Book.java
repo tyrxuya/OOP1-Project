@@ -1,12 +1,8 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.models.books;
 
-import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.books.InvalidGenreException;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.authors.Author;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Genre;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Rating;
-
-import java.util.Objects;
-import java.util.Set;
 
 public class Book {
     private Author author;

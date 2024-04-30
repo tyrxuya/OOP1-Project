@@ -1,6 +1,5 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.commands.book;
 
-import main.java.bg.tu_varna.sit.b1.f22621631.commands.factories.CommandFactory;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.BookFileNotOpenedException;

@@ -42,6 +42,7 @@ public class BookWriter extends GeneralWriter implements FileWritable {
         if (!file.exists()) {
             file.createNewFile();
         }
+
         write(document, new FileOutputStream(file));
     }
 
@@ -51,13 +52,8 @@ public class BookWriter extends GeneralWriter implements FileWritable {
 
         Document document = documentBuilder.newDocument();
         Element root = document.createElement("list");
-//        if (books.isEmpty()) {
-//            document.appendChild(root.appendChild(document.createTextNode("")));
-//            return document;
-//        }
+
         document.appendChild(root);
-
-
 
         for (Book currentBook : books) {
             Element book = document.createElement("book");

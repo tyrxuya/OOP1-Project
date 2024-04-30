@@ -2,6 +2,7 @@ package main.java.bg.tu_varna.sit.b1.f22621631.commands.user;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.IllegalArgumentsException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.WrongSyntaxException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.UserFileNotOpenedException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.WrongFileOpenedException;
@@ -11,9 +12,6 @@ import main.java.bg.tu_varna.sit.b1.f22621631.lists.UserList;
 import main.java.bg.tu_varna.sit.b1.f22621631.users.PermissionLevel;
 import main.java.bg.tu_varna.sit.b1.f22621631.users.User;
 
-import java.io.Console;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -42,7 +40,7 @@ public class AddUser implements RunnableCommand {
             throw new InvalidPermissionLevelException("Access denied, ADMINISTRATOR permission required!"); //PermissionLevelException
         }
 
-        if (argument.isEmpty() || argument.size() == 1) {
+        if (argument.size() != 2) {
             throw new WrongSyntaxException("Wrong syntax! Expected: users add <userName> <password>");
         }
 
@@ -54,7 +52,10 @@ public class AddUser implements RunnableCommand {
 
         System.out.print("Enter permission level (admin or user): ");
         String permissionLevelText = scanner.nextLine().toLowerCase();
-        PermissionLevel permissionLevel = PermissionLevel.valueOf(permissionLevelText.equals("user") ? permissionLevelText.toUpperCase() : "ADMINISTRATOR");
+        if (!permissionLevelText.equalsIgnoreCase("admin") && !permissionLevelText.equalsIgnoreCase("user")) {
+            throw new IllegalArgumentsException("Illegal arguments: expected ADMIN or USER");
+        }
+        PermissionLevel permissionLevel = PermissionLevel.valueOf(permissionLevelText.equalsIgnoreCase("user") ? permissionLevelText.toUpperCase() : "ADMINISTRATOR");
 
         UserList.getInstance().add(new User(argument.get(0), argument.get(1), permissionLevel));
 

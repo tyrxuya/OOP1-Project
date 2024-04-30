@@ -18,9 +18,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 
 public class BookReader implements FileReadable, RunnableCommand {
-    private final File FILE_NAME = new File(".\\src\\main\\java\\bg\\tu_varna\\sit\\b1\\f22621631\\files\\books.xml");
-    private Book book;
-    private BookList bookList = BookList.getInstance();
+    private final File STANDARD_FILE = new File(".\\src\\main\\java\\bg\\tu_varna\\sit\\b1\\f22621631\\files\\books.xml");
 
     @Override
     public void execute() throws ParserConfigurationException {
@@ -30,15 +28,15 @@ public class BookReader implements FileReadable, RunnableCommand {
     @Override
     public void read() {
         try {
-            if (!FILE_NAME.exists()) {
-                FILE_NAME.createNewFile();
+            if (!STANDARD_FILE.exists()) {
+                STANDARD_FILE.createNewFile();
             }
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-            if (FILE_NAME.length() <= 20) {
+            if (STANDARD_FILE.length() <= 20) {
                 return;
             }
-            Document document = documentBuilder.parse(FILE_NAME);
+            Document document = documentBuilder.parse(STANDARD_FILE);
 
             document.getDocumentElement().normalize();
             NodeList nodeList = document.getElementsByTagName("book");
@@ -48,7 +46,7 @@ public class BookReader implements FileReadable, RunnableCommand {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
 
-                    book = new Book.Builder(
+                    Book book = new Book.Builder(
                             new Author(
                                     element.getElementsByTagName("firstName").item(0).getTextContent(),
                                     element.getElementsByTagName("lastName").item(0).getTextContent(),
@@ -68,7 +66,7 @@ public class BookReader implements FileReadable, RunnableCommand {
                                     Rating.valueOf(element.getElementsByTagName("rating").item(0).getTextContent()) : null)
                             .build();
 
-                    bookList.add(book);
+                    BookList.getInstance().add(book);
                 }
             }
 

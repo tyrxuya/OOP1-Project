@@ -34,11 +34,11 @@ public class SortBook implements RunnableCommand {
             throw new UserNotFoundException("Cannot perform BOOKS_SORT without having been logged in!");
         }
 
-        if (arguments.isEmpty()) {
+        if (arguments.size() > 2) {
             throw new WrongSyntaxException("Wrong syntax! Expected: books sort <title/author/year/rating> [<asc/desc>]");
         }
 
-        boolean ascending = arguments.size() != 2 || (arguments.get(1).equalsIgnoreCase("asc"));
+        boolean ascending = arguments.size() == 1 || (arguments.get(1).equalsIgnoreCase("asc"));
         List<Book> tempBookList = BookList.getInstance().getBookList();
         Comparator<Book> bookComparator = getBookComparator();
         tempBookList.sort(ascending ? bookComparator : Collections.reverseOrder(bookComparator));
@@ -81,7 +81,7 @@ public class SortBook implements RunnableCommand {
                     }
                 };
             }
-            default -> throw new WrongSyntaxException("Wrong syntax: books sort <TITLE/AUTHOR/YEAR/RATING> [<ASC/DESC>]");
+            default -> throw new WrongSyntaxException("Wrong syntax: books sort <title/author/year/rating> [<asc/desc>]");
         }
         return bookComparator;
     }

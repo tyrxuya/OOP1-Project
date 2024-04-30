@@ -14,18 +14,9 @@ import java.io.OutputStream;
 
 public abstract class GeneralWriter implements FileWritable, RunnableCommand {
     private final String DEFAULT_PATH = ".\\src\\main\\java\\bg\\tu_varna\\sit\\b1\\f22621631\\files\\";
-    private String path;
 
     public String getDEFAULT_PATH() {
         return DEFAULT_PATH;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
     }
 
     @Override

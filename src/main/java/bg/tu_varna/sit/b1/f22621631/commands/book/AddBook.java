@@ -18,6 +18,8 @@ import main.java.bg.tu_varna.sit.b1.f22621631.models.books.Book;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Genre;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Rating;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -63,12 +65,21 @@ public class AddBook implements RunnableCommand {
         }
 
         System.out.print("Enter book publishing year: ");
-        Integer bookYear = scanner.nextInt();
-        scanner.nextLine();
+        int bookYear;
+
+        try {
+            bookYear = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid year!");
+            return;
+        }
 
         if (bookYear <= 0) {
             throw new InvalidBookYearException("Year cannot be negative!");
         }
+
+        scanner.nextLine();
+
         System.out.print("Enter book ISBN: ");
         String bookIsbn = scanner.nextLine();
 
@@ -87,21 +98,27 @@ public class AddBook implements RunnableCommand {
                 bookIsbn
         );
 
-        System.out.print("Enter genre (to skip press \"s\"): ");
+        System.out.println("Enter genre (to skip press \"s\"): ");
+        System.out.println("Available genres:");
+        printGenres();
         String tempGenre = scanner.nextLine();
-        Genre bookGenre = (tempGenre.equals("s") ? null : Genre.valueOf(tempGenre.toUpperCase().replace(" ", "_")));
+        Genre bookGenre = (tempGenre.equalsIgnoreCase("s") ? null : Genre.valueOf(tempGenre.toUpperCase().replace(" ", "_")));
 
         System.out.print("Enter description (to skip press \"s\"): ");
         String tempDescription = scanner.nextLine();
-        String bookDescription = (tempDescription.equals("s") ? null : tempDescription);
+        String bookDescription = (tempDescription.equalsIgnoreCase("s") ? null : tempDescription);
 
-        System.out.print("Enter key words (to skip press \"s\"): ");
-        String tempKeyWords = scanner.nextLine();
-        String bookKeyWords = (tempKeyWords.equals("s") ? null : tempKeyWords);
+        System.out.print("Enter key words (to skip or stop entering press \"s\"): ");
+        List<String> keyWords = new ArrayList<>();
+        String tempKeyWords;
+        while (!(tempKeyWords = scanner.nextLine()).equalsIgnoreCase("s")) {
+            keyWords.add(tempKeyWords);
+        }
+        String bookKeyWords = (keyWords.isEmpty()) ? null : String.join(", ", keyWords);
 
         System.out.print("Enter rating (to skip press \"s\"): ");
         String tempRating = scanner.nextLine();
-        Rating bookRating = (tempRating.equals("s") ? null : switch (tempRating) {
+        Rating bookRating = (tempRating.equalsIgnoreCase("s") ? null : switch (tempRating) {
             case "0.0" -> Rating.NO_RATING;
             case "1.0" -> Rating.ONE;
             case "1.5" -> Rating.ONE_POINT_FIVE;
@@ -136,5 +153,11 @@ public class AddBook implements RunnableCommand {
         BookList.getInstance().add(newBook);
 
         System.out.println("Book added successfully!");
+    }
+
+    private void printGenres() {
+        for (Genre genre : Genre.values()) {
+            System.out.println(genre.getText());
+        }
     }
 }

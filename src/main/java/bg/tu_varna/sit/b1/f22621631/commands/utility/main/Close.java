@@ -6,13 +6,12 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Close implements RunnableCommand {
     @Override
     public void execute() throws IOException, ParserConfigurationException, TransformerException, SAXException {
-        AppData.getInstance().unload();
+        //AppData.getInstance().unload();
         AppData.getInstance().setOpenedFile(null);
         System.out.println("Closed!");
     }

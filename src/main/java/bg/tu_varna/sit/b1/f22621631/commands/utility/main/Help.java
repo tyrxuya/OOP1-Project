@@ -6,8 +6,6 @@ import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableComm
 import main.java.bg.tu_varna.sit.b1.f22621631.users.PermissionLevel;
 import main.java.bg.tu_varna.sit.b1.f22621631.users.User;
 
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.FileNotFoundException;
 import java.util.Objects;
 
 public class Help implements RunnableCommand {

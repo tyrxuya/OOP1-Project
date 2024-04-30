@@ -4,15 +4,12 @@ import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.write.BookWriter;
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.write.UserWriter;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.data.AppDataManager;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.LibraryFileNotFoundException;
-import main.java.bg.tu_varna.sit.b1.f22621631.lists.UserList;
-import main.java.bg.tu_varna.sit.b1.f22621631.users.PermissionLevel;
 import main.java.bg.tu_varna.sit.b1.f22621631.users.User;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Objects;
 

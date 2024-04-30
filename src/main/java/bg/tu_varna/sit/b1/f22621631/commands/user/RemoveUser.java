@@ -2,7 +2,6 @@ package main.java.bg.tu_varna.sit.b1.f22621631.commands.user;
 
 import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
 import main.java.bg.tu_varna.sit.b1.f22621631.contracts.controllers.RunnableCommand;
-import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.NoArgumentsException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.commands.WrongSyntaxException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.UserFileNotOpenedException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.WrongFileOpenedException;
@@ -10,7 +9,6 @@ import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.users.InvalidPer
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.users.InvalidUserException;
 import main.java.bg.tu_varna.sit.b1.f22621631.lists.UserList;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 public class RemoveUser implements RunnableCommand {

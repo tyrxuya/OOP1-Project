@@ -15,4 +15,9 @@
         <password>12345</password>
         <permissionLevel>ADMINISTRATOR</permissionLevel>
     </user>
+    <user>
+        <username>tajna</username>
+        <password>petrova</password>
+        <permissionLevel>USER</permissionLevel>
+    </user>
 </list>

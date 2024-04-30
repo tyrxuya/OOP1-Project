@@ -18,9 +18,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class UserReader implements FileReadable, RunnableCommand {
-    private final File FILE_NAME = new File(".\\src\\main\\java\\bg\\tu_varna\\sit\\b1\\f22621631\\files\\users.xml");
-    private User user;
-    private UserList userList = UserList.getInstance();
+    private final File STANDARD_FILE = new File(".\\src\\main\\java\\bg\\tu_varna\\sit\\b1\\f22621631\\files\\users.xml");
 
     @Override
     public void execute() throws ParserConfigurationException, IOException, SAXException {
@@ -29,16 +27,16 @@ public class UserReader implements FileReadable, RunnableCommand {
 
     @Override
     public void read() throws IOException, ParserConfigurationException, SAXException {
-        if (!FILE_NAME.exists()) {
-            FILE_NAME.createNewFile();
+        if (!STANDARD_FILE.exists()) {
+            STANDARD_FILE.createNewFile();
         }
 
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        if (FILE_NAME.length() <= 20) {
+        if (STANDARD_FILE.length() <= 20) {
             return;
         }
-        Document document = documentBuilder.parse(FILE_NAME);
+        Document document = documentBuilder.parse(STANDARD_FILE);
 
         document.getDocumentElement().normalize();
         NodeList nodeList = document.getElementsByTagName("user");
@@ -47,12 +45,12 @@ public class UserReader implements FileReadable, RunnableCommand {
             Node node = nodeList.item(i);
             if (node.getNodeType() == Node.ELEMENT_NODE) {
                 Element element = (Element)node;
-                user = new User(
+                User user = new User(
                         element.getElementsByTagName("username").item(0).getTextContent(),
                         element.getElementsByTagName("password").item(0).getTextContent(),
                         PermissionLevel.valueOf(element.getElementsByTagName("permissionLevel").item(0).getTextContent())
                 );
-                userList.add(user);
+                UserList.getInstance().add(user);
             }
         }
     }

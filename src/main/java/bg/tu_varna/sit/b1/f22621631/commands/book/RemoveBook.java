@@ -9,7 +9,6 @@ import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.lists.UserNotFoundExcep
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.users.InvalidPermissionLevelException;
 import main.java.bg.tu_varna.sit.b1.f22621631.lists.BookList;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 
 public class RemoveBook implements RunnableCommand {

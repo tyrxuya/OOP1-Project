@@ -21,7 +21,7 @@ public class SaveAs implements RunnableCommand {
     @Override
     public void execute() throws ParserConfigurationException, IOException, TransformerException {
         if (argument.isEmpty()) {
-            throw new WrongSyntaxException("Wrong syntax: SAVE AS <fileName>");
+            throw new WrongSyntaxException("Wrong syntax: save as <fileName>");
         }
 
         File fileToSave = new File(

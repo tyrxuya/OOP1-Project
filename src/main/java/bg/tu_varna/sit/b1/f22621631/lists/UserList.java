@@ -1,13 +1,10 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.lists;
 
-import main.java.bg.tu_varna.sit.b1.f22621631.commands.utility.data.AppData;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.lists.UserNotFoundException;
 import main.java.bg.tu_varna.sit.b1.f22621631.users.User;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class UserList {
     private static UserList instance;
