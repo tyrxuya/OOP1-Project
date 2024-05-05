@@ -1,5 +1,7 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums;
 
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.books.InvalidRatingException;
+
 public enum Rating {
     NO_RATING(0.0),
     ONE(1.0),
@@ -14,11 +16,27 @@ public enum Rating {
 
     private final Double rating;
 
-    private Rating(Double rating) {
+    Rating(Double rating) {
         this.rating = rating;
     }
 
     public String getText() {
         return rating.toString();
+    }
+
+    public static Rating getRating(String rating) {
+        return switch (rating) {
+            case "0.0" -> Rating.NO_RATING;
+            case "1.0" -> Rating.ONE;
+            case "1.5" -> Rating.ONE_POINT_FIVE;
+            case "2.0" -> Rating.TWO;
+            case "2.5" -> Rating.TWO_POINT_FIVE;
+            case "3.0" -> Rating.THREE;
+            case "3.5" -> Rating.THREE_POINT_FIVE;
+            case "4.0" -> Rating.FOUR;
+            case "4.5" -> Rating.FOUR_POINT_FIVE;
+            case "5.0" -> Rating.FIVE;
+            default -> throw new InvalidRatingException("Unexpected value: " + rating); //InvalidRatingException
+        };
     }
 }

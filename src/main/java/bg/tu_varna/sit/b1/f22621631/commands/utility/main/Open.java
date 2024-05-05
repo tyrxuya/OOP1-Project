@@ -37,7 +37,7 @@ public class Open implements RunnableCommand {
         }
 
         if (Objects.nonNull(AppData.getInstance().getOpenedFile())) {
-            throw new FileAlreadyOpenedException("File already opened!");
+            throw new FileAlreadyOpenedException("A file is already opened!");
         }
 
         //AppData.getInstance().load(new File(PATH.concat(argument.get(0))));

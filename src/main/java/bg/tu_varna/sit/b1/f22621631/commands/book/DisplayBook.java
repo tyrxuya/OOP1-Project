@@ -13,12 +13,6 @@ import java.io.FileNotFoundException;
 import java.util.List;
 
 public class DisplayBook implements RunnableCommand {
-    private List<String> arguments;
-
-    public DisplayBook(List<String> arguments) {
-        this.arguments = arguments;
-    }
-
     @Override
     public void execute() {
         if (AppData.getInstance().getOpenedFile() == null) {

@@ -14,7 +14,7 @@ public class Save implements RunnableCommand {
     @Override
     public void execute() throws IOException, ParserConfigurationException, TransformerException, SAXException {
         if (Objects.isNull(AppData.getInstance().getOpenedFile())) {
-            throw new FileNotOpenedException("No file to save!");
+            throw new FileNotOpenedException("No file open to save!");
         }
         AppData.getInstance().unload();
         System.out.println("Saved!");

@@ -13,26 +13,9 @@ public class CommandController {
     private static final Map<Command, CommandFactory> commands = new HashMap<>();
 
     static {
-        commands.put(Command.OPEN, CommandFactory.getInstance());
-        commands.put(Command.EXIT, CommandFactory.getInstance());
-        commands.put(Command.CLOSE, CommandFactory.getInstance());
-        commands.put(Command.SAVE, CommandFactory.getInstance());
-        commands.put(Command.SAVE_AS, CommandFactory.getInstance());
-        commands.put(Command.HELP, CommandFactory.getInstance());
-
-        commands.put(Command.BOOKS_ALL, CommandFactory.getInstance());
-        commands.put(Command.BOOKS_VIEW, CommandFactory.getInstance());
-        commands.put(Command.BOOKS_FIND, CommandFactory.getInstance());
-        commands.put(Command.BOOKS_ADD, CommandFactory.getInstance());
-        commands.put(Command.BOOKS_REMOVE, CommandFactory.getInstance());
-        commands.put(Command.BOOKS_SORT, CommandFactory.getInstance());
-        commands.put(Command.BOOKS_INFO, CommandFactory.getInstance());
-
-        commands.put(Command.LOGIN, CommandFactory.getInstance());
-        commands.put(Command.LOGOUT, CommandFactory.getInstance());
-        commands.put(Command.USERS_ALL, CommandFactory.getInstance());
-        commands.put(Command.USERS_ADD, CommandFactory.getInstance());
-        commands.put(Command.USERS_REMOVE, CommandFactory.getInstance());
+        for (Command command : Command.values()) {
+            commands.put(command, CommandFactory.getInstance());
+        } //!!!!
     }
 
     public static void run(String command) {

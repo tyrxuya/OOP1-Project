@@ -37,34 +37,37 @@ public class FindBook implements RunnableCommand {
             throw new UserNotFoundException("Cannot perform BOOKS_FIND without having been logged in!"); //UserNotFoundException
         }
 
-        if (arguments.size() != 2) {
+        if (arguments.isEmpty()) {
             throw new WrongSyntaxException("Wrong syntax! Expected: books find <title/author/tag> <value>");
         }
 
-        List<Book> searchedBooks = new ArrayList<>();
-        switch (arguments.get(0)) {
+        String criteria = arguments.get(0);
+
+        if (!criteria.equalsIgnoreCase("title") && !criteria.equalsIgnoreCase("author") && !criteria.equalsIgnoreCase("tag")) {
+            throw new WrongSyntaxException("Wrong syntax! Expected: books find <title/author/tag> <value>");
+        }
+
+        if (arguments.size() == 1) {
+            throw new WrongSyntaxException("Wrong syntax! Expected: books find <title/author/tag> <value>");
+        }
+
+        String searchCriteria = String.join(" ", arguments.subList(1, arguments.size()));
+
+        arguments = new ArrayList<>();
+
+        arguments.add(criteria);
+        arguments.add(searchCriteria);
+
+        List<Book> searchedBooks;
+        switch (arguments.get(0).toLowerCase()) {
             case "title" -> {
-                StringBuilder title = new StringBuilder();
-                for (String string : arguments) {
-                    if (string.equals("title")) {
-                        continue;
-                    }
-                    title.append(string).append(" ");
-                }
-                title.deleteCharAt(title.lastIndexOf(" "));
-                searchedBooks = searchByTitle(title.toString());
+                searchedBooks = searchByTitle(arguments.get(1));
             }
             case "author" -> {
-                String author = arguments.get(1) + " " + arguments.get(2);
-                searchedBooks = searchByAuthor(author);
+                searchedBooks = searchByAuthor(arguments.get(1));
             }
             case "tag" -> {
-                StringBuilder tags = new StringBuilder();
-                for (int i = 1; i < arguments.size(); i++) {
-                    tags.append(arguments.get(i)).append(" ");
-                }
-                tags.deleteCharAt(tags.lastIndexOf(" "));
-                searchedBooks = searchByTag(tags.toString());
+                searchedBooks = searchByTag(arguments.get(1));
             }
             default -> throw new IllegalArgumentsException("Invalid criteria!"); //IllegalArgumentsException
         }

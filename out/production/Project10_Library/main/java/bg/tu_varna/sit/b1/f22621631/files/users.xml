@@ -25,4 +25,9 @@
         <password>password</password>
         <permissionLevel>ADMINISTRATOR</permissionLevel>
     </user>
+    <user>
+        <username>kateto</username>
+        <password>06</password>
+        <permissionLevel>USER</permissionLevel>
+    </user>
 </list>

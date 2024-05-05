@@ -15,10 +15,11 @@ public class Close implements RunnableCommand {
     public void execute() throws IOException, ParserConfigurationException, TransformerException, SAXException {
         //AppData.getInstance().unload();
         if (Objects.isNull(AppData.getInstance().getOpenedFile())) {
-            throw new FileNotOpenedException("No file to close!");
+            throw new FileNotOpenedException("No file open to close!");
         }
 
         AppData.getInstance().setOpenedFile(null);
+        //eventualno da iztriq infoto v spisucite
         System.out.println("Closed!");
     }
 }

@@ -7,10 +7,7 @@ import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.files.WrongFileOpenedEx
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.lists.UserNotFoundException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.authors.InvalidAuthorException;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.authors.InvalidCountryException;
-import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.books.InvalidBookIsbnException;
-import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.books.InvalidBookTitleException;
-import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.books.InvalidBookYearException;
-import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.books.InvalidRatingException;
+import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.books.*;
 import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.models.users.InvalidPermissionLevelException;
 import main.java.bg.tu_varna.sit.b1.f22621631.lists.BookList;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.authors.Author;
@@ -43,7 +40,7 @@ public class AddBook implements RunnableCommand {
         }
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter author name: ");
+        System.out.print("Enter author name (first and last name): ");
         String authorName = scanner.nextLine();
 
         if (Objects.isNull(authorName) || authorName.split(" ").length != 2) {
@@ -106,6 +103,11 @@ public class AddBook implements RunnableCommand {
         System.out.println("Available genres:");
         printGenres();
         String tempGenre = scanner.nextLine();
+
+        if (!Genre.isValidGenre(tempGenre)) {
+            throw new InvalidGenreException("Invalid genre!");
+        }
+
         Genre bookGenre = (tempGenre.equalsIgnoreCase("s") ? null : Genre.valueOf(tempGenre.toUpperCase().replace(" ", "_")));
 
         System.out.print("Enter description (to skip press \"s\"): ");
@@ -116,25 +118,16 @@ public class AddBook implements RunnableCommand {
         List<String> keyWords = new ArrayList<>();
         String tempKeyWords;
         while (!(tempKeyWords = scanner.nextLine()).equalsIgnoreCase("s")) {
+            if (tempKeyWords.isEmpty()) {
+                continue;
+            }
             keyWords.add(tempKeyWords);
         }
         String bookKeyWords = (keyWords.isEmpty()) ? null : String.join(", ", keyWords);
 
         System.out.print("Enter rating (to skip press \"s\"): ");
         String tempRating = scanner.nextLine();
-        Rating bookRating = (tempRating.equalsIgnoreCase("s") ? null : switch (tempRating) {
-            case "0.0" -> Rating.NO_RATING;
-            case "1.0" -> Rating.ONE;
-            case "1.5" -> Rating.ONE_POINT_FIVE;
-            case "2.0" -> Rating.TWO;
-            case "2.5" -> Rating.TWO_POINT_FIVE;
-            case "3.0" -> Rating.THREE;
-            case "3.5" -> Rating.THREE_POINT_FIVE;
-            case "4.0" -> Rating.FOUR;
-            case "4.5" -> Rating.FOUR_POINT_FIVE;
-            case "5.0" -> Rating.FIVE;
-            default -> throw new InvalidRatingException("Unexpected value: " + tempRating); //InvalidRatingException
-        });
+        Rating bookRating = (tempRating.equalsIgnoreCase("s") ? null : Rating.getRating(tempRating));
 
         if (Objects.nonNull(bookGenre)) {
             tempBook.genre(bookGenre);

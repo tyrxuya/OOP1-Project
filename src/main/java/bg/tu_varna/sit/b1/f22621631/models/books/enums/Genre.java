@@ -29,11 +29,20 @@ public enum Genre {
 
     private final String genreText;
 
-    private Genre(String genreText) {
+    Genre(String genreText) {
         this.genreText = genreText;
     }
 
     public String getText() {
         return genreText;
+    }
+
+    public static boolean isValidGenre(String genreName) {
+        for (Genre genre : Genre.values()) {
+            if (genre.getText().equalsIgnoreCase(genreName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

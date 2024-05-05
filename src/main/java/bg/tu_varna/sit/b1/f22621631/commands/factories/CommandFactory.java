@@ -29,7 +29,7 @@ public class CommandFactory {
             case HELP -> new Help();
             case EXIT -> new Exit();
 
-            case BOOKS_ALL, BOOKS_VIEW -> new DisplayBook(arguments);
+            case BOOKS_ALL, BOOKS_VIEW -> new DisplayBook();
             case BOOKS_INFO -> new InfoBook(arguments);
             case BOOKS_ADD -> new AddBook();
             case BOOKS_REMOVE -> new RemoveBook(arguments);

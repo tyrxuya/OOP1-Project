@@ -47,39 +47,19 @@ public class SortBook implements RunnableCommand {
     }
 
     private Comparator<Book> getBookComparator() {
-        Comparator<Book> bookComparator = null;
+        Comparator<Book> bookComparator;
         switch (arguments.get(0)) {
             case "title" -> {
-                bookComparator = new Comparator<Book>() {
-                    @Override
-                    public int compare(Book o1, Book o2) {
-                        return o1.getTitle().compareTo(o2.getTitle());
-                    }
-                };
+                bookComparator = Comparator.comparing(o -> o.getTitle().toLowerCase());
             }
             case "author" -> {
-                bookComparator = new Comparator<Book>() {
-                    @Override
-                    public int compare(Book o1, Book o2) {
-                        return o1.getAuthor().getName().compareTo(o2.getAuthor().getName());
-                    }
-                };
+                bookComparator = Comparator.comparing(o -> o.getAuthor().getName().toLowerCase());
             }
             case "year" -> {
-                bookComparator = new Comparator<Book>() {
-                    @Override
-                    public int compare(Book o1, Book o2) {
-                        return Integer.compare(o1.getPublishingYear(), o2.getPublishingYear());
-                    }
-                };
+                bookComparator = Comparator.comparingInt(Book::getPublishingYear);
             }
             case "rating" -> {
-                bookComparator = new Comparator<Book>() {
-                    @Override
-                    public int compare(Book o1, Book o2) {
-                        return o1.getRating().compareTo(o2.getRating());
-                    }
-                };
+                bookComparator = Comparator.comparing(Book::getRating);
             }
             default -> throw new WrongSyntaxException("Wrong syntax: books sort <title/author/year/rating> [<asc/desc>]");
         }
