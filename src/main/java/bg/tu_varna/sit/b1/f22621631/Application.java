@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Application {
     public static void main(String[] args) throws IOException {
         System.out.println("Library information system [Version 1.0]");
-        System.out.println("(c) Vankata 22621631. All rights reserved");
+        System.out.println("(c) Vankata 22621631. All rights reserved.");
         System.out.println();
         do {
             Scanner scanner = new Scanner(System.in);
