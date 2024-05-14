@@ -25,6 +25,14 @@ public class UserList {
         return new ArrayList<>(userList);
     }
 
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
+    public void clear() {
+        userList.clear();
+    }
+
     public void add(User user) {
         if (!userExists(user.getUsername())) {
             userList.add(user);

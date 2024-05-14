@@ -35,6 +35,10 @@ public class BookList {
         }
     }
 
+    public void clear() {
+        bookList.clear();
+    }
+
     public void remove(Book book) {
         if (bookExists(book.getIsbn())) {
             bookList.remove(book);
