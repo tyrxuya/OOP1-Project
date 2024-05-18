@@ -20,7 +20,7 @@ public class CommandFactory {
         return instance;
     }
 
-    public RunnableCommand getCommand(Command command, List<String> arguments) {
+    public RunnableCommand getExecutable(Command command, List<String> arguments) {
         return switch (command) {
             case OPEN -> new Open(arguments);
             case CLOSE -> new Close();

@@ -12,10 +12,10 @@ import main.java.bg.tu_varna.sit.b1.f22621631.lists.UserList;
 import java.util.List;
 
 public class RemoveUser implements RunnableCommand {
-    private List<String> argument;
+    private final List<String> arguments;
 
-    public RemoveUser(List<String> argument) {
-        this.argument = argument;
+    public RemoveUser(List<String> arguments) {
+        this.arguments = arguments;
     }
 
     @Override
@@ -36,11 +36,11 @@ public class RemoveUser implements RunnableCommand {
             throw new InvalidPermissionLevelException("Access denied, ADMINISTRATOR permission required!");
         }
 
-        if (argument.size() != 1) {
+        if (arguments.size() != 1) {
             throw new WrongSyntaxException("Wrong syntax! Expected: users remove <username>");
         }
 
-        UserList.getInstance().remove(argument.get(0));
+        UserList.getInstance().remove(arguments.get(0));
         System.out.println("User removed successfully!");
     }
 }

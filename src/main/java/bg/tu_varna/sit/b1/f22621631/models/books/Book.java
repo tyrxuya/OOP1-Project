@@ -5,14 +5,14 @@ import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Genre;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.enums.Rating;
 
 public class Book {
-    private Author author;
-    private String title;
-    private Genre genre;
-    private String description;
-    private Integer publishingYear;
+    private final Author author;
+    private final String title;
+    private final Genre genre;
+    private final String description;
+    private final Integer publishingYear;
     private String keyWords;
     private Rating rating;
-    private String isbn;
+    private final String isbn;
 
     private Book(Builder builder) {
         this.author = builder.author;
@@ -49,8 +49,16 @@ public class Book {
         return keyWords;
     }
 
+    public void setKeyWords(String keyWords) {
+        this.keyWords = keyWords;
+    }
+
     public Rating getRating() {
         return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
 
     public String getIsbn() {
@@ -82,14 +90,14 @@ public class Book {
     }
 
     public static class Builder {
-        private Author author;
-        private String title;
+        private final Author author;
+        private final String title;
         private Genre genre;
         private String description;
-        private Integer publishingYear;
+        private final Integer publishingYear;
         private String keyWords;
         private Rating rating;
-        private String isbn;
+        private final String isbn;
 
         public Builder(Author author, String title, Integer publishingYear, String isbn) {
             this.author = author;

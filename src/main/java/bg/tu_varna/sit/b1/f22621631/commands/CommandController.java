@@ -35,7 +35,7 @@ public class CommandController {
             arguments = arguments.subList(startingIndex, arguments.size());
             //CommandFactory.getInstance().getCommand(Command.valueOf(command), arguments).execute();
             Command executableCommand = Command.valueOf(command);
-            commands.get(executableCommand).getCommand(executableCommand, arguments).execute();
+            commands.get(executableCommand).getExecutable(executableCommand, arguments).execute();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

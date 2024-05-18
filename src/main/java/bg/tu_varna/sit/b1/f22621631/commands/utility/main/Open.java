@@ -19,20 +19,20 @@ import java.util.List;
 import java.util.Objects;
 
 public class Open implements RunnableCommand {
-    private List<String> argument;
+    private final List<String> arguments;
     private final String PATH = ".\\src\\main\\java\\bg\\tu_varna\\sit\\b1\\f22621631\\files\\";
 
-    public Open(List<String> argument) {
-        this.argument = argument;
+    public Open(List<String> arguments) {
+        this.arguments = arguments;
     }
 
     @Override
     public void execute() throws IOException, ParserConfigurationException, TransformerException, SAXException {
-        if (argument.size() != 1) {
+        if (arguments.size() != 1) {
             throw new WrongSyntaxException("Wrong syntax: open <fileName>");
         }
 
-        if (!argument.get(0).equals("books.xml") && !argument.get(0).equals("users.xml")) {
+        if (!arguments.get(0).equals("books.xml") && !arguments.get(0).equals("users.xml")) {
             throw new WrongFileOpenedException("No file with such name found!");
         }
 
@@ -41,7 +41,7 @@ public class Open implements RunnableCommand {
         }
 
         //AppData.getInstance().load(new File(PATH.concat(argument.get(0))));
-        File file = new File(PATH.concat(argument.get(0)));
+        File file = new File(PATH.concat(arguments.get(0)));
         if (!file.exists()) {
             file.createNewFile();
         }
@@ -57,6 +57,6 @@ public class Open implements RunnableCommand {
             (new BookInitializer()).execute();
         }
 
-        System.out.println("File " + argument.get(0) + " opened successfully!");
+        System.out.println("File " + arguments.get(0) + " opened successfully!");
     }
 }

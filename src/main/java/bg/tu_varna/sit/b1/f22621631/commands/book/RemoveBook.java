@@ -12,7 +12,7 @@ import main.java.bg.tu_varna.sit.b1.f22621631.lists.BookList;
 import java.util.List;
 
 public class RemoveBook implements RunnableCommand {
-    private List<String> arguments;
+    private final List<String> arguments;
 
     public RemoveBook(List<String> arguments) {
         this.arguments = arguments;

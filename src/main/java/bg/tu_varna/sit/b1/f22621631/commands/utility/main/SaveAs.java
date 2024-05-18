@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.Objects;
 
 public class SaveAs implements RunnableCommand {
-    private List<String> argument;
+    private final List<String> arguments;
 
-    public SaveAs(List<String> argument) {
-        this.argument = argument;
+    public SaveAs(List<String> arguments) {
+        this.arguments = arguments;
     }
 
     @Override
@@ -26,13 +26,13 @@ public class SaveAs implements RunnableCommand {
             throw new FileNotOpenedException("No file open to save!");
         }
 
-        if (argument.size() != 1) {
+        if (arguments.size() != 1) {
             throw new WrongSyntaxException("Wrong syntax: save as <fileName>");
         }
 
         File fileToSave = new File(
-                argument.get(0).contains(File.separator) ?
-                        argument.get(0) :
+                arguments.get(0).contains(File.separator) ?
+                        arguments.get(0) :
                         Paths.get(
                                 AppData.getInstance().
                                         getOpenedFile().
@@ -42,7 +42,7 @@ public class SaveAs implements RunnableCommand {
                                 getParent().
                                 toString().
                                 concat(File.separator).
-                                concat(argument.get(0))
+                                concat(arguments.get(0))
         );
 
         AppData.getInstance().save(fileToSave);

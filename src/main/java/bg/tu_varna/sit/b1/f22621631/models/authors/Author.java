@@ -1,9 +1,9 @@
 package main.java.bg.tu_varna.sit.b1.f22621631.models.authors;
 
 public class Author {
-    private String firstName;
-    private String lastName;
-    private String country;
+    private final String firstName;
+    private final String lastName;
+    private final String country;
 
     public Author(String firstName, String lastName, String country) {
         this.firstName = firstName;

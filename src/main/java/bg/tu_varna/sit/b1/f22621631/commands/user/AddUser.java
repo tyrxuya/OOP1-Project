@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AddUser implements RunnableCommand {
-    private List<String> argument;
+    private final List<String> arguments;
 
-    public AddUser(List<String> argument) {
-        this.argument = argument;
+    public AddUser(List<String> arguments) {
+        this.arguments = arguments;
     }
 
     @Override
@@ -40,11 +40,11 @@ public class AddUser implements RunnableCommand {
             throw new InvalidPermissionLevelException("Access denied, ADMINISTRATOR permission required!"); //PermissionLevelException
         }
 
-        if (argument.size() != 2) {
+        if (arguments.size() != 2) {
             throw new WrongSyntaxException("Wrong syntax! Expected: users add <userName> <password>");
         }
 
-        if (UserList.getInstance().userExists(argument.get(0))) {
+        if (UserList.getInstance().userExists(arguments.get(0))) {
             throw new InvalidUserException("User with such username already exists!"); //LoginException
         }
 
@@ -57,7 +57,7 @@ public class AddUser implements RunnableCommand {
         }
         PermissionLevel permissionLevel = PermissionLevel.valueOf(permissionLevelText.equalsIgnoreCase("user") ? permissionLevelText.toUpperCase() : "ADMINISTRATOR");
 
-        UserList.getInstance().add(new User(argument.get(0), argument.get(1), permissionLevel));
+        UserList.getInstance().add(new User(arguments.get(0), arguments.get(1), permissionLevel));
 
         System.out.println("User added successfully!");
     }

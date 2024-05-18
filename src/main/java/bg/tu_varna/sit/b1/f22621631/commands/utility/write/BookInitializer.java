@@ -9,7 +9,7 @@ import javax.xml.transform.TransformerException;
 import java.io.IOException;
 
 public class BookInitializer implements RunnableCommand {
-    private BookWriter bookWriter = new BookWriter();
+    private final BookWriter bookWriter = new BookWriter();
 
     @Override
     public void execute() throws IOException, ParserConfigurationException, TransformerException, SAXException {

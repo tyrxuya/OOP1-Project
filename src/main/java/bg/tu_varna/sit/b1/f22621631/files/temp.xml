@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<list>
+    <book>
+        <author>
+            <firstName>Tahereh</firstName>
+            <lastName>Mafi</lastName>
+            <country>USA</country>
+        </author>
+        <title>Shatter Me</title>
+        <publishingYear>2011</publishingYear>
+        <isbn>123456789</isbn>
+        <rating>FIVE</rating>
+    </book>
+    <book>
+        <author>
+            <firstName>Tahereh</firstName>
+            <lastName>Mafi</lastName>
+            <country>USA</country>
+        </author>
+        <title>Destroy Me</title>
+        <publishingYear>2012</publishingYear>
+        <isbn>192837465</isbn>
+        <genre>FANTASY</genre>
+        <keyWords>Neshto si, Aaron Warner, Ne znam</keyWords>
+        <rating>FOUR_POINT_FIVE</rating>
+    </book>
+    <book>
+        <author>
+            <firstName>Tahereh</firstName>
+            <lastName>Mafi</lastName>
+            <country>USA</country>
+        </author>
+        <title>Ignite me</title>
+        <publishingYear>2013</publishingYear>
+        <isbn>987654321</isbn>
+        <genre>FANTASY</genre>
+        <keyWords>Aaron Warner, Juliette Ferai.</keyWords>
+        <rating>FIVE</rating>
+    </book>
+    <book>
+        <author>
+            <firstName>Stefani</firstName>
+            <lastName>Garber</lastName>
+            <country>USA</country>
+        </author>
+        <title>Once upon a broken heart</title>
+        <publishingYear>2021</publishingYear>
+        <isbn>9786190302421</isbn>
+        <genre>FANTASY</genre>
+        <keyWords>prince of hearts</keyWords>
+        <rating>FOUR_POINT_FIVE</rating>
+    </book>
+</list>

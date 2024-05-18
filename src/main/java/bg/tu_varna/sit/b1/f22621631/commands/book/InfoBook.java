@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class InfoBook implements RunnableCommand {
-    private List<String> arguments;
+    private final List<String> arguments;
 
     public InfoBook(List<String> arguments) {
         this.arguments = arguments;
@@ -40,10 +40,6 @@ public class InfoBook implements RunnableCommand {
             throw new WrongSyntaxException("Wrong syntax! Expected: books info <isbn>");
         }
 
-        printBook();
-    }
-
-    private void printBook() {
         Book book = BookList.getInstance().findBook(arguments.get(0));
         System.out.println(book);
     }

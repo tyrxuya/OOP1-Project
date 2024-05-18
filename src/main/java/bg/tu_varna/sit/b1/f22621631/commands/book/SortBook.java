@@ -14,7 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SortBook implements RunnableCommand {
-    private List<String> arguments;
+    private final List<String> arguments;
 
     public SortBook(List<String> arguments) {
         this.arguments = arguments;

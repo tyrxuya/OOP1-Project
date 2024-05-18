@@ -8,10 +8,6 @@ import main.java.bg.tu_varna.sit.b1.f22621631.exceptions.lists.UserNotFoundExcep
 import main.java.bg.tu_varna.sit.b1.f22621631.lists.BookList;
 import main.java.bg.tu_varna.sit.b1.f22621631.models.books.Book;
 
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.FileNotFoundException;
-import java.util.List;
-
 public class DisplayBook implements RunnableCommand {
     @Override
     public void execute() {
@@ -27,10 +23,6 @@ public class DisplayBook implements RunnableCommand {
             throw new UserNotFoundException("Cannot perform this operation without having been logged in!"); //UserNotFoundException
         }
 
-        printAllBooks();
-    }
-
-    private void printAllBooks() {
         System.out.println("Available books in library:");
         System.out.println();
         int index = 1;
