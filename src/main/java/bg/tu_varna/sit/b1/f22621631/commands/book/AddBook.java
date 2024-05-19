@@ -104,7 +104,7 @@ public class AddBook implements RunnableCommand {
         printGenres();
         String tempGenre = scanner.nextLine();
 
-        if (!Genre.isValidGenre(tempGenre)) {
+        if (!Genre.isValidGenre(tempGenre) && !tempGenre.equalsIgnoreCase("s")) {
             throw new InvalidGenreException("Invalid genre!");
         }
 
