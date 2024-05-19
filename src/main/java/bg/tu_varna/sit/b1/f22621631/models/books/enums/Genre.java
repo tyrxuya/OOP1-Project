@@ -43,6 +43,11 @@ public enum Genre {
                 return true;
             }
         }
+
+        if (genreName.equalsIgnoreCase("s")) {
+            return true;
+        }
+
         return false;
     }
 }
